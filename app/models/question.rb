@@ -1,6 +1,7 @@
 class Question < ActiveRecord::Base
 
-  belongs_to :user
-  has_many :messages
+  belongs_to :profile
+  has_many :answers
+  belongs_to :tag
 
 end
