@@ -1,4 +1,4 @@
-class Message < ActiveRecord::Base
+class Answer < ActiveRecord::Base
 
   belongs_to :thread
   belongs_to :user

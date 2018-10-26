@@ -2,13 +2,13 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html]
 
-  resources :threads do
-    resources :messages
+  resources :questions do
+    resources :answers
   end
 
-  resources :messages
+  resources :answers
 
   resources :profiles
 
-  root 'thread#index'
+  root 'questions#index'
 end
