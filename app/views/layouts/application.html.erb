@@ -10,8 +10,34 @@
   </head>
 
   <body>
-  	 <p class="notice"><%= notice %></p>
-     <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <div class="ui fixed inverted menu">
+      <div class="ui container">
+        <a href="/" class="header item">
+					<img class="logo" src="<%= image_url "logo.png" %>">
+          ProjectName
+        </a>
+				<%# TODO: update class url %>
+				<%= link_to "Class", "/", class: "item" %>
+				<%= link_to "Forum", questions_path, class: "item" %>
+				<% if user_signed_in? %>
+					<div class="ui simple right dropdown item">
+						<%= current_user.email %> <i class="dropdown icon"></i>
+						<div class="menu">
+							<%# TODO: update user profile path %>
+							<%= link_to "Profile", "/", class: "item" %>
+							<%= link_to "Logout", destroy_user_session_url, method: :delete, class: "item" %>
+						</div>
+					</div>
+				<% else %>
+					<%= link_to "Login", new_user_session_url, class: "item right" %>
+				<% end %>
+      </div>
+    </div>
+
+		<div class="ui main text container">
+			<p class="notice"><%= notice %></p>
+    	<p class="alert"><%= alert %></p>
+    	<%= yield %>
+		</div>
   </body>
 </html>
