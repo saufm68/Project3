@@ -53,7 +53,19 @@
   <% end %>
 </div>
 <div class="ui bottom attached tab segment" data-tab="translate">
-  Translate
+  <%= form_with model: @question, class: "ui form", local: true do |form| %>
+		<%= form.hidden_field :tag, value: "translate" %>
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title, required: true, placeholder: "How to translate the sentence into Chinese?" %>
+    </div>
+    <div class="field">
+      <%= form.label :description, "Description (optional)" %>
+      <%= form.text_area :description, rows: 3, placeholder: "Write additional information." %>
+    </div>
+		<%= form.submit "Submit", class: "ui primary button" %>
+		<%= link_to "Cancel", questions_path, class: "ui button" %>
+  <% end %>
 </div>
 <div class="ui bottom attached tab segment" data-tab="others">
   Others
