@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
+# Use jQuery for Semantic UI and DOM manipulation
+gem 'jquery-rails'
 # Use Semantic UI for css style
 gem 'semantic-ui-sass'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
