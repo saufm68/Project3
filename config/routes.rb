@@ -10,5 +10,9 @@ Rails.application.routes.draw do
 
   resources :profiles
 
-  root 'questions#index'
+  resources :classes do
+    resources :videos
+  end
+
+  root 'profiles#index'
 end
