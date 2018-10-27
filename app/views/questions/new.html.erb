@@ -1,0 +1,84 @@
+<h1>Ask a question.</h1>
+
+<div class="ui top attached tabular menu">
+  <a class="active item" data-tab="vocabulary">Vocabulary</a>
+  <a class="item" data-tab="grammar">Grammar</a>
+  <a class="item" data-tab="pronunciation">Pronunciation</a>
+  <a class="item" data-tab="translate">Translate</a>
+  <a class="item" data-tab="others">Others</a>
+</div>
+<div class="ui bottom attached active tab segment" data-tab="vocabulary">
+  <%= form_with model: @question, class: "ui form", local: true do |form| %>
+		<%= form.hidden_field :tag, value: "vocabulary" %>
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title, required: true, placeholder: "How do you say this in Chinese?" %>
+    </div>
+    <div class="field">
+      <%= form.label :description, "Description (optional)" %>
+      <%= form.text_area :description, rows: 3, placeholder: "Write additional information." %>
+    </div>
+		<%= form.submit "Submit", class: "ui primary button" %>
+		<%= link_to "Cancel", questions_path, class: "ui button" %>
+  <% end %>
+</div>
+<div class="ui bottom attached tab segment" data-tab="grammar">
+  <%= form_with model: @question, class: "ui form", local: true do |form| %>
+		<%= form.hidden_field :tag, value: "grammar" %>
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title, required: true, placeholder: "Is the sentence grammatically correct and natural?" %>
+    </div>
+    <div class="field">
+      <%= form.label :description, "Description (optional)" %>
+      <%= form.text_area :description, rows: 3, placeholder: "Write additional information." %>
+    </div>
+		<%= form.submit "Submit", class: "ui primary button" %>
+		<%= link_to "Cancel", questions_path, class: "ui button" %>
+  <% end %>
+</div>
+<div class="ui bottom attached tab segment" data-tab="pronunciation">
+  <%= form_with model: @question, class: "ui form", local: true do |form| %>
+		<%= form.hidden_field :tag, value: "pronunciation" %>
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title, required: true, placeholder: "How's my pronunciation?" %>
+    </div>
+    <div class="field">
+      <%= form.label :description, "Description (optional)" %>
+      <%= form.text_area :description, rows: 3, placeholder: "Write additional information." %>
+    </div>
+		<%= form.submit "Submit", class: "ui primary button" %>
+		<%= link_to "Cancel", questions_path, class: "ui button" %>
+  <% end %>
+</div>
+<div class="ui bottom attached tab segment" data-tab="translate">
+  <%= form_with model: @question, class: "ui form", local: true do |form| %>
+		<%= form.hidden_field :tag, value: "translate" %>
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title, required: true, placeholder: "How to translate the sentence into Chinese?" %>
+    </div>
+    <div class="field">
+      <%= form.label :description, "Description (optional)" %>
+      <%= form.text_area :description, rows: 3, placeholder: "Write additional information." %>
+    </div>
+		<%= form.submit "Submit", class: "ui primary button" %>
+		<%= link_to "Cancel", questions_path, class: "ui button" %>
+  <% end %>
+</div>
+<div class="ui bottom attached tab segment" data-tab="others">
+  <%= form_with model: @question, class: "ui form", local: true do |form| %>
+		<%= form.hidden_field :tag, value: "others" %>
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title, required: true, placeholder: "Ask anything." %>
+    </div>
+    <div class="field">
+      <%= form.label :description, "Description (optional)" %>
+      <%= form.text_area :description, rows: 3, placeholder: "Write additional information." %>
+    </div>
+		<%= form.submit "Submit", class: "ui primary button" %>
+		<%= link_to "Cancel", questions_path, class: "ui button" %>
+  <% end %>
+</div>
