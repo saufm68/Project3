@@ -68,5 +68,17 @@
   <% end %>
 </div>
 <div class="ui bottom attached tab segment" data-tab="others">
-  Others
+  <%= form_with model: @question, class: "ui form", local: true do |form| %>
+		<%= form.hidden_field :tag, value: "others" %>
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title, required: true, placeholder: "Ask anything." %>
+    </div>
+    <div class="field">
+      <%= form.label :description, "Description (optional)" %>
+      <%= form.text_area :description, rows: 3, placeholder: "Write additional information." %>
+    </div>
+		<%= form.submit "Submit", class: "ui primary button" %>
+		<%= link_to "Cancel", questions_path, class: "ui button" %>
+  <% end %>
 </div>
