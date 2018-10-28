@@ -13,7 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
 
     super do |resource|
-      inputs = { user_id: resource.id, username: "Anonymous#{resource.id}", photo_url: '/elyse.png',  exp: 0}
+      inputs = { user_id: resource.id, username: "Anonymous#{resource.id}", photo_url: '/elyse.png',  exp: 0, level: 1}
       @profile = Profile.new(inputs)
       @profile.save
     end
