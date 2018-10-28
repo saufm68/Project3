@@ -9,5 +9,5 @@ window.onload = function() {
     on: 'hover'
   });
 
-  $('#example4').progress('increment');
+  $('#level').progress('increment');
 };
