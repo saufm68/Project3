@@ -1,0 +1,37 @@
+<div class="ui grid">
+  <div class="row">
+
+		<div class="two wide column center aligned">
+      <div class="item profile" data-tooltip="<%= @question.profile.username %>" data-position="top center">
+        <a href="<%= profile_path(@question.profile) %>">
+          <img
+            class="ui tiny circular image profile"
+            src="<%= @question.profile.photo_url %>"
+            alt="Profile photo">
+        </a>
+        <div class="content">
+          <%# TODO: convert exp to level %>
+          <div class="sub header">Lv. <%= @question.profile.exp %></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="twelve wide column">
+      <div class="ui segment items">
+				<div class="item">
+					<div class="content">
+        		<div class="header">
+							<%= @question.title %>
+						</div>
+						<div class="meta">
+							<%= @question.created_at.strftime("%F %T") %>
+						</div>
+						<div class="description">
+        			<p><%= @question.description %></p>
+						</div>
+					</div>
+				</div>
+      </div>
+    </div>
+  </div>
+</div>
