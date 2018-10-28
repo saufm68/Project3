@@ -25,7 +25,7 @@
             <%= current_user.profile.username %> <i class="dropdown icon"></i>
             <div class="menu">
               <%# TODO: update user profile path %>
-              <%= link_to "Profile", "/", class: "item" %>
+              <%= link_to "Profile", profile_path(current_user), class: "item" %>
               <%= link_to "Logout", destroy_user_session_url, method: :delete, class: "item" %>
             </div>
           </div>

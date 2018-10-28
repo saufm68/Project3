@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_26_104312) do
+ActiveRecord::Schema.define(version: 2018_10_28_103724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,12 +26,6 @@ ActiveRecord::Schema.define(version: 2018_10_26_104312) do
     t.index ["question_id"], name: "index_answers_on_question_id"
   end
 
-  create_table "classes", force: :cascade do |t|
-    t.string "type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "favourites", force: :cascade do |t|
     t.bigint "profile_id"
     t.bigint "question_id"
@@ -39,6 +33,12 @@ ActiveRecord::Schema.define(version: 2018_10_26_104312) do
     t.datetime "updated_at", null: false
     t.index ["profile_id"], name: "index_favourites_on_profile_id"
     t.index ["question_id"], name: "index_favourites_on_question_id"
+  end
+
+  create_table "playlists", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -83,10 +83,10 @@ ActiveRecord::Schema.define(version: 2018_10_26_104312) do
 
   create_table "videos", force: :cascade do |t|
     t.string "video_url"
-    t.bigint "class_id"
+    t.bigint "playlist_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["class_id"], name: "index_videos_on_class_id"
+    t.index ["playlist_id"], name: "index_videos_on_playlist_id"
   end
 
 end

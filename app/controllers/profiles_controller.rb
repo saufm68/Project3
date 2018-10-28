@@ -9,9 +9,14 @@ class ProfilesController < ApplicationController
   end
 
   def update
-  end
-
-  def destroy
+    @profile = Profile.find(params[:id])
+    if params[:profile][:username]
+      @profile.username = params[:profile][:username]
+    else
+      @profile.bio = params[:profile][:bio]
+    end
+    @profile.save
+    redirect_to @profile
   end
 
 end

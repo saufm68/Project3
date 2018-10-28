@@ -1,14 +1,46 @@
- <img src="/images/avatar/large/daniel.jpg">
+<div class="ui special cards">
+  <div class="card">
+    <div class="blurring dimmable image">
+      <div class="ui dimmer">
+        <div class="content">
+          <div class="center">
+            <div class="ui inverted button">Video Call</div>
+          </div>
+        </div>
+      </div>
+      <%= image_tag (@profile.photo_url) %>
+    </div>
+  </div>
+</div>
+
 
 <%= form_with model: @profile, class: 'ui form', local: true do |form| %>
 	<div class='field'>
-		<%= form.label :username %>
+		<h2>Username:</h2>
 		<%= form.text_field :username, required: true %>
 	</div>
+	<%= form.submit 'Change', class: 'ui button'  %>
+<% end %>
+
+<%= form_with model: @profile, class: 'ui form', local: true do |form| %>
 	<div class='field'>
-		<%= form.label :bio %>
+		<h2>Biography:</h2>
 		<%= form.text_area :bio, placeholder: 'Enter a short biography of yourself' %>
 	</div>
-	<%= form.hidden_field :exp, value: 0 %>
-	<%= form.submit 'Create Profile', class: 'ui primary button' %>
+	<%= form.submit 'Change', class: 'ui button' %>
 <% end %>
+
+<div class="ui leaderboard">
+	<h1>Level:</h1>
+	<div class="ui indicating progress" data-value="1" data-total="5" id='example4'>
+	  <div class="bar"></div>
+	  <div class="label">Exp</div>
+	</div>
+</div>
+
+
+
+
+
+
+
