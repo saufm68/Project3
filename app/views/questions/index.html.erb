@@ -7,7 +7,7 @@
 
 <div class="ui large middle aligned divided animated list">
   <% @questions.each do |question| %>
-    <a href="<%= question_path(question) %>" class="item">
+    <a href="<%= question_path(question) %>" class="item question">
       <img class="ui avatar image" src="<%= question.profile.photo_url %>">
       <div class="content">
         <div class="header"><%= question.title %></div>
