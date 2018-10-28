@@ -1,18 +1,11 @@
 class ProfilesController < ApplicationController
+  # before_action :authenticate_user!, :except => [ :show, :index ]
 
   def index
   end
 
-  def new
-  end
-
-  def create
-  end
-
   def show
-  end
-
-  def edit
+    @profile = Profile.find(params[:id])
   end
 
   def update
