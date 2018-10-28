@@ -36,14 +36,14 @@ class CreateTable < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    create_table :classes do |t|
+    create_table :playlists do |t|
       t.string :type
       t.timestamps
     end
 
     create_table :videos do |t|
       t.string :video_url
-      t.references :class
+      t.references :playlist
       t.timestamps
     end
   end
