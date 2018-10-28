@@ -1,3 +1,3 @@
 class Video < ActiveRecord::Base
-  belongs_to :class
+  belongs_to :playlist
 end
