@@ -35,3 +35,14 @@
     </div>
   </div>
 </div>
+
+<%= form_with model: @answer, local: true, class: "reply" do |form| %>
+	<%= form.hidden_field :question_id, value: @question.id %>
+	<div class="ui fluid action input">
+		<%= form.text_field :description, required: true, placeholder: "Type your answer here." %>
+		<button class="ui teal right labeled icon button">
+			<i class="arrow right icon"></i>
+			Reply
+		</button>
+	</div>
+<% end %>
