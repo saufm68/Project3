@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :profiles
 
-  resources :classes do
+  resources :playlists do
     resources :videos
   end
 
