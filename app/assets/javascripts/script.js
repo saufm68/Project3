@@ -4,4 +4,10 @@ window.onload = function() {
 
   // Active username popup on show question page.
   $('.profile').popup();
+
+  $('.special.cards .image').dimmer({
+    on: 'hover'
+  });
+
+  $('#level').progress('increment');
 };
