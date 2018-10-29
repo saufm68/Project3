@@ -34,6 +34,38 @@
   </div>
 
   <%# answers %>
+  <% if @correctAnswer %>
+    <div class="row replies">
+      <div class="ui segment items qna">
+        <div class="item">
+          <div class="content">
+            <span class="ui red ribbon label"><i class="chess queen icon"></i></span>
+            <span class="meta right">
+              <%= @correctAnswer.created_at.strftime("%F %T") %>
+            </span>
+            <div class="description">
+              <p><%= @correctAnswer.description %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="two wide column center aligned">
+        <div class="item" data-tooltip="<%= @correctAnswer.profile.username %>" data-position="top center">
+          <a href="<%= profile_path(@correctAnswer.profile) %>">
+            <img
+              class="ui tiny circular image"
+              src="<%= @correctAnswer.profile.photo_url %>"
+              alt="Profile photo">
+          </a>
+          <div class="content">
+            <div class="sub header">Lv. <%= @correctAnswer.profile.level %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
   <% @answers.each do |answer| %>
     <%# Avatar is on the left if the reply is written by the author of the question %>
     <%# Otherwise, the avatar is on the right %>
@@ -42,11 +74,18 @@
         <div class="ui segment items qna">
           <div class="item">
             <div class="content">
-              <div class="meta right">
+              <span class="meta right">
                 <%= answer.created_at.strftime("%F %T") %>
-              </div>
+              </span>
               <div class="description">
                 <p><%= answer.description %></p>
+                <% if !@correctAnswer && current_user.profile == @question.profile %>
+                  <%= form_with model: answer, local: true do |form| %>
+                    <a class="circular ui icon mini green button floated right">
+                      <i class="check icon"></i>
+                    </a>
+                  <% end %>
+                <% end %>
               </div>
             </div>
           </div>
