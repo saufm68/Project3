@@ -1,17 +1,29 @@
-<div class="ui special cards">
-  <div class="card">
-    <div class="blurring dimmable image">
-      <div class="ui dimmer">
-        <div class="content">
-          <div class="center">
-            <div class="ui inverted button">Video Call</div>
-          </div>
-        </div>
-      </div>
-      <%= image_tag (@profile.photo_url) %>
-    </div>
-  </div>
-</div>
+<% if @profile.id != current_user.id %>
+	<div class="ui special cards">
+	  <div class="card">
+	   	<div class="blurring dimmable image">
+	      <div class="ui dimmer">
+	        <div class="content">
+	          <div class="center">
+	          <% if @profile.user %>
+	            <div class="ui inverted button">Video Call</div>
+	          <% else %>
+	          	<div class="ui inverted button" disabled>Account Deleted</div>
+	          <% end %>
+	          </div>
+	        </div>
+	      </div>
+	      <%= image_tag @profile.photo_url %>
+	    </div>
+	  </div>
+	</div>
+<% else %>
+	<div class="ui card">
+		<div class="image">
+			<%= image_tag @profile.photo_url %>
+		</div>
+	</div>
+<% end %>
 
 <div class="ui cards">
   <div class="card">
