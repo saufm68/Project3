@@ -1,44 +1,52 @@
-<% if @profile.id != current_user.id %>
-	<div class="ui special cards">
-	  <div class="card">
-	   	<div class="blurring dimmable image">
-	      <div class="ui dimmer">
-	        <div class="content">
-	          <div class="center">
-	          <% if @profile.user %>
-	            <div class="ui inverted button">Video Call</div>
-	          <% else %>
-	          	<div class="ui inverted button" disabled>Account Deleted</div>
-	          <% end %>
-	          </div>
-	        </div>
-	      </div>
-	      <%= image_tag @profile.photo_url %>
-	    </div>
-	  </div>
-	</div>
-<% else %>
-	<div class="ui card">
-		<div class="image">
-			<%= image_tag @profile.photo_url %>
+<div class='ui grid'>
+	<div class='two column row'>
+		<div class='column'>
+			<% if @profile.id != current_user.id %>
+				<div class="ui special cards">
+				  <div class="card">
+				   	<div class="blurring dimmable image">
+				      <div class="ui dimmer">
+				        <div class="content">
+				          <div class="center">
+				          <% if @profile.user %>
+				            <div class="ui inverted button">Video Call</div>
+				          <% else %>
+				          	<div class="ui inverted button" disabled>Account Deleted</div>
+				          <% end %>
+				          </div>
+				        </div>
+				      </div>
+				      <%= image_tag @profile.photo_url %>
+				    </div>
+				  </div>
+				</div>
+			<% else %>
+				<div class="ui card">
+					<div class="image">
+						<%= image_tag @profile.photo_url %>
+					</div>
+				</div>
+			<% end %>
+		</div>
+		<div class='column'>
+			<div class="ui cards">
+		  	<div class="card">
+		    	<div class="content">
+		      	<div class="header"><h1><%= @profile.username %></h1></div>
+		      	<div class="meta">Biography:</div>
+		      	<div class="description">
+		        	<%= @profile.bio %>
+		        	<br>
+		        	<br>
+			      </div>
+			      <%= link_to '/settings' do %>
+	        		<button class="fluid  ui button">Change</button>
+		        <% end %>
+			    </div>
+			  </div>
+			</div>
 		</div>
 	</div>
-<% end %>
-
-<div class="ui cards">
-  <div class="card">
-    <div class="content">
-      <div class="header"><%= @profile.username %></div>
-      <div class="description">
-        <%= @profile.bio %>
-        <br>
-        <br>
-        <%= link_to '/settings' do %>
-        	<button class="fluid  ui button">Change</button>
-        <% end %>
-      </div>
-    </div>
-  </div>
 </div>
 
 <% if @profile.level > 5 %>
@@ -47,7 +55,7 @@
 	<% total = 5 %>
 <% end %>
 
-<div>
+<div class="progress-bar">
 	<%= content_tag :h1, "Level: #{@profile.level}"%>
 	<%= content_tag :div, class: 'ui indicating progress', data: {value: @profile.exp, total: total}, id: 'level' do %>
 		<%= content_tag :div, '', class: 'bar' %>
@@ -57,23 +65,25 @@
 
 <div class="ui top attached tabular menu">
   <a class="active item" data-tab="threads">Threads</a>
-  <a class="item" data-tab="favs">Favourites</a>
+  <a class="item" data-tab="bookmarks">Bookmarks</a>
 </div>
 <div class="ui bottom attached active tab segment" data-tab="threads">
 	<div class='content-container'>
-		<% if @profile.questions.length > 0 %>
-			<%@profile.questions.each do |question|%>
-				<a href="<%= question_path(question) %>" class="item question">
-		      <img class="ui avatar image" src="<%= question.profile.photo_url %>">
-		      <div class="content">
-		        <div class="header"><%= question.title %></div>
-		      </div>
-	    	</a>
+		<div class="ui large middle aligned divided animated list">
+			<% if @profile.questions.length > 0 %>
+				<%@profile.questions.each do |question|%>
+					<a href="<%= question_path(question) %>" class="item question">
+			      <img class="ui avatar image" src="<%= question.profile.photo_url %>">
+			      <div class="content">
+			        <div class="header"><%= question.title %></div>
+			      </div>
+		    	</a>
+				<% end %>
 			<% end %>
-		<% end %>
+		</div>
 	</div>
 </div>
-<div class="ui bottom attached tab segment" data-tab="favs">
+<div class="ui bottom attached tab segment" data-tab="bookmarks">
 	<div class='content-container'>
 	</div>
 </div>
