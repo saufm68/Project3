@@ -11,8 +11,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # # POST /resource
   def create
+
     super do |resource|
-      inputs = { user_id: resource.id, username: "anonymous#{resource.id}", exp: 0}
+      inputs = { user_id: resource.id, username: "Anonymous#{resource.id}", photo_url: '/elyse.png',  exp: 0, level: 1}
       @profile = Profile.new(inputs)
       @profile.save
     end

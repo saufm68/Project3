@@ -8,11 +8,13 @@ Rails.application.routes.draw do
 
   resources :answers
 
-  resources :profiles
+  resources :profiles, except: :edit
 
   resources :playlists do
     resources :videos
   end
+
+  get '/settings', to: 'profiles#edit', as: 'edit_profile'
 
   root 'profiles#index'
 end

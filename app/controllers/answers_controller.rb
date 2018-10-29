@@ -7,6 +7,15 @@ class AnswersController < ApplicationController
   end
 
   def create
+    question = Question.find(answer_params[:question_id])
+    @answer = Answer.new(
+      description: answer_params[:description],
+      vote: 0,
+      profile: current_user.profile,
+      question: question
+    )
+    @answer.save
+    redirect_to question
   end
 
   def show
@@ -19,6 +28,12 @@ class AnswersController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+
+  def answer_params
+    params.require(:answer).permit(:question_id, :description)
   end
 
 end

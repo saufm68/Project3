@@ -1,11 +1,11 @@
 <div class="ui grid">
   <div class="row">
 
-		<div class="two wide column center aligned">
-      <div class="item profile" data-tooltip="<%= @question.profile.username %>" data-position="top center">
+    <div class="two wide column center aligned">
+      <div class="item" data-tooltip="<%= @question.profile.username %>" data-position="top center">
         <a href="<%= profile_path(@question.profile) %>">
           <img
-            class="ui tiny circular image profile"
+            class="ui tiny circular image"
             src="<%= @question.profile.photo_url %>"
             alt="Profile photo">
         </a>
@@ -18,20 +18,102 @@
 
     <div class="twelve wide column">
       <div class="ui segment items">
-				<div class="item">
-					<div class="content">
-        		<div class="header">
-							<%= @question.title %>
-						</div>
-						<div class="meta">
-							<%= @question.created_at.strftime("%F %T") %>
-						</div>
-						<div class="description">
-        			<p><%= @question.description %></p>
-						</div>
-					</div>
-				</div>
+        <div class="item">
+          <div class="content">
+            <div class="header">
+              <%= @question.title %>
+            </div>
+            <div class="meta">
+              <%= @question.created_at.strftime("%F %T") %>
+            </div>
+            <div class="description">
+              <p><%= @question.description %></p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+
+  <%# answers %>
+  <% @answers.each do |answer| %>
+    <div class="row">
+      <%# Avatar is on the left if the reply is written by the author of the question %>
+      <%# Otherwise, the avatar is on the right %>
+      <% if answer.profile.id != @question.profile.id %>
+        <div class="twelve wide column">
+          <div class="ui segment items">
+            <div class="item">
+              <div class="content">
+                <div class="meta">
+                  <%= answer.created_at.strftime("%F %T") %>
+                </div>
+                <div class="description">
+                  <p><%= answer.description %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="two wide float column center aligned">
+          <div class="item" data-tooltip="<%= answer.profile.username %>" data-position="top center">
+            <a href="<%= profile_path(answer.profile) %>">
+              <img
+                class="ui tiny circular image"
+                src="<%= answer.profile.photo_url %>"
+                alt="Profile photo">
+            </a>
+            <div class="content">
+              <%# TODO: convert exp to level %>
+              <div class="sub header">Lv. <%= answer.profile.exp %></div>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <div class="two wide float column center aligned">
+          <div class="item" data-tooltip="<%= answer.profile.username %>" data-position="top center">
+            <a href="<%= profile_path(answer.profile) %>">
+              <img
+                class="ui tiny circular image"
+                src="<%= answer.profile.photo_url %>"
+                alt="Profile photo">
+            </a>
+            <div class="content">
+              <%# TODO: convert exp to level %>
+              <div class="sub header">Lv. <%= answer.profile.exp %></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="twelve wide column">
+          <div class="ui segment items">
+            <div class="item">
+              <div class="content">
+                <div class="meta">
+                  <%= answer.created_at.strftime("%F %T") %>
+                </div>
+                <div class="description">
+                  <p><%= answer.description %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+  <% end %>
+
 </div>
+
+<%= form_with model: @answer, local: true, class: "reply" do |form| %>
+  <%= form.hidden_field :question_id, value: @question.id %>
+  <div class="ui fluid action input">
+    <%= form.text_field :description, required: true, placeholder: "Type your answer here." %>
+    <button class="ui teal right labeled icon button">
+      <i class="arrow right icon"></i>
+      Reply
+    </button>
+  </div>
+<% end %>

@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  # before_action :authenticate_user!, :except => [ :show, :index ]
+  before_action :authenticate_user!, :except => [ :show, :index ]
 
   def index
   end
@@ -8,10 +8,19 @@ class ProfilesController < ApplicationController
     @profile = Profile.find(params[:id])
   end
 
-  def update
+  def edit
+    @profile = Profile.find(current_user.id)
   end
 
-  def destroy
+  def update
+    @profile = Profile.find(params[:id])
+    if params[:profile][:username]
+      @profile.username = params[:profile][:username]
+    else
+      @profile.bio = params[:profile][:bio]
+    end
+    @profile.save
+    redirect_to '/settings'
   end
 
 end

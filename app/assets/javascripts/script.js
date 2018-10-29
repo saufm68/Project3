@@ -4,4 +4,12 @@ window.onload = function() {
 
   // Active username popup on show question page.
   $('.profile').popup();
+
+  //dimmer to show video call button
+  $('.special.cards .image').dimmer({
+    on: 'hover'
+  });
+
+  //progress bar increment
+  $('#level').progress('increment');
 };

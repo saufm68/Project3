@@ -1,0 +1,27 @@
+<h1>Settings</h1>
+
+<h2 class="ui top attached header">
+  Profile
+</h2>
+<div class="ui attached segment">
+	<%= form_with model: @profile, class: 'ui form', local: true do |form| %>
+		<div class='field'>
+			<h3>Username:</h3>
+			<%= form.text_field :username, required: true %>
+		</div>
+		<%= form.submit 'Change', class: 'ui button'  %>
+	<% end %>
+	<br>
+	<%= form_with model: @profile, class: 'ui form', local: true do |form| %>
+		<div class='field'>
+			<h3>Biography:</h3>
+			<%= form.text_area :bio, placeholder: 'Enter a short biography of yourself' %>
+		</div>
+		<%= form.submit 'Change', class: 'ui button' %>
+	<% end %>
+	<br>
+	<button class="ui button"><%= link_to 'Profile', profile_path(current_user) %></button>
+</div>
+<br>
+<button class="negative ui button delete-account"><%= link_to "Delete Account", registration_path(current_user), data: { confirm: "Do you want to delete your account? Once deleted, account cannot be retrieved." }, method: :delete, class: 'delete-account' %></button>
+
