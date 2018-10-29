@@ -15,7 +15,7 @@
 	<%= form_with model: @profile, class: 'ui form', local: true do |form| %>
 		<div class='field'>
 			<h3>Biography:</h3>
-			<%= form.text_area :bio, placeholder: 'Enter a short biography of yourself' %>
+			<%= form.text_area :bio, placeholder: 'Enter a short biography of yourself', maxlength: 204, rows: 4 %>
 		</div>
 		<%= form.submit 'Change', class: 'ui button' %>
 	<% end %>
