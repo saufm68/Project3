@@ -1,0 +1,31 @@
+<h1>All classes</h1>
+
+
+<% @playlist.each do |playlist|%>
+	<div>
+		<%= link_to playlist.name, playlist_videos_path(playlist) %>
+
+		<%= link_to 'Delete Playlist', playlist_path(playlist),
+			method: :delete,
+			data: { confirm: 'Are you sure?' }  %>
+
+	</div>
+<%end%>
+
+<%= link_to 'Add Playlist', new_playlist_path %>
+
+<div>
+
+	<h2>Getting Started</h2>
+
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/FPf96GuWnfc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+</div>
+
+<div>
+	<h2>Intermediate</h2>
+</div>
+
+<div>
+	<h2>Advanced</h2>
+</div>
