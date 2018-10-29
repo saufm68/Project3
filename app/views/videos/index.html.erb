@@ -4,6 +4,9 @@
 <% @video.each do |video|%>
 	<div>
 		<%= link_to video.video_url, playlist_video_path(@playlist.id, video.id) %>
+		<%= link_to 'Delete Video', playlist_video_path(@playlist.id, video.id),
+			method: :delete,
+			data: { confirm: 'Are you sure?' }  %>
 
 	</div>
 <%end%>
