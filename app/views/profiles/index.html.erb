@@ -1,30 +1,40 @@
 <div class='landing-image'></div>
 
-<div class='ui card option'>
-	<div class='content'>
-		<div class='header'>Class</div>
-		<div class='sumamry'>Learn malay by following a set of video tutorials based on youtr current level - Beginner, Intermediate, Professional</div>
+<div class='ui grid'>
+	<div class='two column row'>
+		<div class='column'>
+			<div class='ui card option'>
+				<div class='content'>
+					<div class='header'>Class</div>
+					<div class='sumamry'>Learn malay by following a set of video tutorials based on youtr current level - Beginner, Intermediate, Professional</div>
+				</div>
+				<div class='extra content'>
+					<%= link_to playlists_path do %>
+						<button class='fluid ui button'>Class</button>
+					<% end %>
+				</div>
+			</div>
+		</div>
+		<div class='column'>
+			<div class='ui card option'>
+				<div class='content'>
+					<div class='header'>Forum</div>
+					<div class='sumamry'>Browse through questions or ask questions related to learning the language</div>
+				</div>
+				<div class='extra content'>
+					<%= link_to questions_path do %>
+						<button class='fluid ui button'>Forum</button>
+					<% end %>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div class='extra content'>
-		<%= link_to playlists_path do %>
-			<button class='ui button'>Class</button>
-		<% end %>
+	<div class="row">
+		<div class="column">
+			<div class='ui segment'>
+				<h2>About Us</h2>
+				<p>placeholder</p>
+			</div>
+		</div>
 	</div>
-</div>
-
-<div class='ui card option'>
-	<div class='content'>
-		<div class='header'>Forum</div>
-		<div class='sumamry'>Browse through questions or ask questions related to learning the language</div>
-	</div>
-	<div class='extra content'>
-		<%= link_to questions_path do %>
-			<button class='ui button'>Forum</button>
-		<% end %>
-	</div>
-</div>
-
-<div class='ui segment'>
-	<h2>About Us</h2>
-	<p>placeholder</p>
 </div>
