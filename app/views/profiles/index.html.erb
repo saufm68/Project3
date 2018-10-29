@@ -6,7 +6,9 @@
 		<div class='sumamry'>Learn malay by following a set of video tutorials based on youtr current level - Beginner, Intermediate, Professional</div>
 	</div>
 	<div class='extra content'>
-		<button class='ui button'><%= link_to 'Class', playlists_path %></button>
+		<%= link_to playlists_path do %>
+			<button class='ui button'>Class</button>
+		<% end %>
 	</div>
 </div>
 
@@ -16,7 +18,9 @@
 		<div class='sumamry'>Browse through questions or ask questions related to learning the language</div>
 	</div>
 	<div class='extra content'>
-		<button class='ui button'><%= link_to 'Forum', questions_path %></button>
+		<%= link_to questions_path do %>
+			<button class='ui button'>Forum</button>
+		<% end %>
 	</div>
 </div>
 
