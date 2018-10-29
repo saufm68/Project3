@@ -80,10 +80,8 @@
               <div class="description">
                 <p><%= answer.description %></p>
                 <% if !@correctAnswer && current_user.profile == @question.profile %>
-                  <%= form_with model: answer, local: true do |form| %>
-                    <a class="circular ui icon mini green button floated right">
-                      <i class="check icon"></i>
-                    </a>
+                  <%= link_to answer_path(answer), class: "circular ui icon mini green button floated right", method: :put do %>
+                    <i class="check icon"></i>
                   <% end %>
                 <% end %>
               </div>
