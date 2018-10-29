@@ -12,6 +12,13 @@ class AnswersController < ApplicationController
     redirect_to question
   end
 
+  def update
+    answer = Answer.find(params[:id])
+    answer.answered = true
+    answer.save
+    redirect_to answer.question
+  end
+
   private
 
   def answer_params
