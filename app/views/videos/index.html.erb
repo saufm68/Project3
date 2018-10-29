@@ -3,12 +3,13 @@
 
 <% @video.each do |video|%>
 	<div>
-		<%= link_to video.video_url, playlist_video_path(@playlist.id, @video) %>
+		<%= link_to video.video_url, playlist_video_path(@playlist.id, video.id) %>
 
 	</div>
 <%end%>
 
 
+<h1>Add Video</h1>
 <%= form_with scope: :video, url: playlist_videos_path(@playlist.id), local: true do |form| %>
 
   <p>
