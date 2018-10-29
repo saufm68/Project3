@@ -1,0 +1,15 @@
+<h1>Creating New Playlist</h1>
+
+<%= form_with scope: :playlist, url: new_playlist_path, local: true do |form| %>
+
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_area :name %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', playlists_path %>

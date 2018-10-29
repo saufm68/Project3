@@ -1,0 +1,26 @@
+<h1><%= @playlist.name %></h1>
+
+
+<% @video.each do |video|%>
+	<div>
+		<%= link_to video.video_url, playlist_video_path(@playlist.id, video.id) %>
+
+	</div>
+<%end%>
+
+
+<h1>Add Video</h1>
+<%= form_with scope: :video, url: playlist_videos_path(@playlist.id), local: true do |form| %>
+
+  <p>
+    <%= form.label :video_url %><br>
+    <%= form.text_area :video_url %>
+  </p>
+
+	<%= form.hidden_field :playlist_id, :value => @playlist.id %>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+<%= link_to 'Back to Playlist', playlists_path %>
