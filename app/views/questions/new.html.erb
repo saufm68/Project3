@@ -12,7 +12,7 @@
     <%= form.hidden_field :tag, value: "vocabulary" %>
     <div class="field">
       <%= form.label :title %>
-      <%= form.text_field :title, required: true, placeholder: "How do you say this in Chinese?" %>
+      <%= form.text_field :title, required: true, value: "How do you say <word> in Malay?" %>
     </div>
     <div class="field">
       <%= form.label :description, "Description (optional)" %>
@@ -27,7 +27,7 @@
     <%= form.hidden_field :tag, value: "grammar" %>
     <div class="field">
       <%= form.label :title %>
-      <%= form.text_field :title, required: true, placeholder: "Is the sentence grammatically correct and natural?" %>
+      <%= form.text_field :title, required: true, value: "Is the <sentence/phrase> grammatically correct and natural?" %>
     </div>
     <div class="field">
       <%= form.label :description, "Description (optional)" %>
@@ -42,7 +42,7 @@
     <%= form.hidden_field :tag, value: "pronunciation" %>
     <div class="field">
       <%= form.label :title %>
-      <%= form.text_field :title, required: true, placeholder: "How's my pronunciation?" %>
+      <%= form.text_field :title, required: true, value: "How's my pronunciation?" %>
     </div>
     <div class="field">
       <%= form.label :description, "Description (optional)" %>
@@ -57,7 +57,7 @@
     <%= form.hidden_field :tag, value: "translate" %>
     <div class="field">
       <%= form.label :title %>
-      <%= form.text_field :title, required: true, placeholder: "How to translate the sentence into Chinese?" %>
+      <%= form.text_field :title, required: true, value: "How to translate <word/phrase/sentence> into Malay?" %>
     </div>
     <div class="field">
       <%= form.label :description, "Description (optional)" %>
