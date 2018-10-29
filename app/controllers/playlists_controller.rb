@@ -15,10 +15,8 @@ class PlaylistsController < ApplicationController
   def create
     @playlist = Playlist.new(playlist_params)
     @playlist.save
-    # render plain: params.inspect
-
-    # render plain: "test"
-    redirect_to '/playlists'
+    # redirect_to '/playlists'
+    redirect_to playlists_path
 
   end
 
@@ -26,7 +24,7 @@ class PlaylistsController < ApplicationController
     @playlist = Playlist.find(params[:id])
     @playlist.destroy
 
-    redirect_to @playlist
+    redirect_to playlists_path
   end
 
   private
