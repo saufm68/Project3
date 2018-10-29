@@ -7,3 +7,16 @@
   width: 50%;
   bottom: 2em;
 }
+
+.ui.grid > .replies {
+  justify-content: flex-end;
+}
+
+.ui.segment.items.qna {
+  max-width: 70%;
+  margin: 0;
+}
+
+.qna .item .content .right {
+  text-align: right;
+}
