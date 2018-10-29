@@ -20,3 +20,7 @@
 .qna .item .content .right {
   float: right;
 }
+
+.ui.items > .item > .content p {
+  clear: both;
+}
