@@ -13,10 +13,24 @@ class AnswersController < ApplicationController
   end
 
   def update
-    answer = Answer.find(params[:id])
-    answer.answered = true
-    answer.save
-    redirect_to answer.question
+    @answer = Answer.find(params[:id])
+    @answer.answered = true
+    @answer.save
+    @profile = Profile.find(@answer.profile.id)
+    @profile.exp += 1
+    if @profile.level > 5
+      if @profile.exp >= 10
+        @profile.exp = 0
+        @profile.level += 1
+      end
+    else
+      if @profile.exp >= 5
+        @profile.exp = 0
+        @profile.level += 1
+      end
+    end
+    @profile.save
+    redirect_to @answer.question
   end
 
   private
