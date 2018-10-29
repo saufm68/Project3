@@ -21,7 +21,9 @@
         <%= @profile.bio %>
         <br>
         <br>
-        <button class="fluid ui button"><%= link_to 'Change' ,'/settings' %></button>
+        <%= link_to '/settings' do %>
+        	<button class="fluid  ui button">Change</button>
+        <% end %>
       </div>
     </div>
   </div>
