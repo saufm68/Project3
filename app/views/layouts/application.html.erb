@@ -16,8 +16,7 @@
         <img class="logo" src="<%= image_url "logo.png" %>">
           ProjectName
         </a>
-        <%# TODO: update class url %>
-        <%= link_to "Class", "/", class: "item" %>
+        <%= link_to "Class", playlists_path, class: "item" %>
         <%= link_to "Forum", questions_path, class: "item" %>
 
         <% if user_signed_in? %>
