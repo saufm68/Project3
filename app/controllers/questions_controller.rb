@@ -18,11 +18,11 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    @bookmark = Bookmark.find_by(profile_id: current_user.id, question_id: params[:id])
     @question = Question.find(params[:id])
     @answer = Answer.new
     @correctAnswer = Answer.find_by(question_id: @question.id, answered: true)
     @answers = Answer.where(question_id: @question.id, answered: nil)
-    puts @answers
   end
 
   def edit

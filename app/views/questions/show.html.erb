@@ -1,6 +1,11 @@
 <div class="ui right aligned container">
-	<% if @question.profile.bookmarks.questions.include(@question) %>
-		<%= link_to bookmarks_path(profile_id: @question.profile.id, question_id: @question.id), class: "ui labeled icon blue button", method: :post do %>
+	<% if @bookmark %>
+		<%= link_to bookmark_path(@bookmark, question_id: @question.id), class: "ui labeled icon grey button", method: :delete do %>
+			<i class='bookmark icon'></i>
+			Bookmarked
+		<% end %>
+	<% else %>
+		<%= link_to bookmarks_path(profile_id: current_user.id, question_id: @question.id), class: "ui labeled icon blue button", method: :post do %>
 			<i class='bookmark icon'></i>
 			Bookmark
 		<% end %>
