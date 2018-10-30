@@ -26,6 +26,18 @@
           </div>
           <div class="description">
             <p><%= @question.description %></p>
+            <% if @question.media.url %>
+              <div class="ui small image media">
+                <%= image_tag @question.media.url %>
+              </div>
+              <div class="ui basic modal">
+                <div class="ui fluid image">
+                  <div class="image content">
+                    <%= image_tag @question.media.url %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
