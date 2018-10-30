@@ -15,13 +15,17 @@
 	<%= form_with model: @profile, class: 'ui form', local: true do |form| %>
 		<div class='field'>
 			<h3>Biography:</h3>
-			<%= form.text_area :bio, placeholder: 'Enter a short biography of yourself' %>
+			<%= form.text_area :bio, placeholder: 'Enter a short biography of yourself', maxlength: 204, rows: 4 %>
 		</div>
 		<%= form.submit 'Change', class: 'ui button' %>
 	<% end %>
 	<br>
-	<button class="ui button"><%= link_to 'Profile', profile_path(current_user) %></button>
+	<%= link_to profile_path(current_user) do %>
+		<button class="ui button">Profile</button>
+	<% end %>
 </div>
 <br>
-<button class="negative ui button delete-account"><%= link_to "Delete Account", registration_path(current_user), data: { confirm: "Do you want to delete your account? Once deleted, account cannot be retrieved." }, method: :delete, class: 'delete-account' %></button>
+<%= link_to registration_path(current_user), data: { confirm: "Do you want to delete your account? Once deleted, account cannot be retrieved." }, method: :delete do %>
+<button class="negative ui button delete-account">Delete Account</button>
+<% end %>
 

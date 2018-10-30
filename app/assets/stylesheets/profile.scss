@@ -1,0 +1,23 @@
+.progress-bar {
+	margin: 15px 0 25px 0;
+}
+
+.ui.cards > .card {
+	height: 290px;
+	width: 390px;
+}
+
+.ui.special.cards > .card {
+	height: 290px;
+	width: 290px;
+}
+
+.ui.cards > .card > .content > .description {
+	height: 160px;
+	word-wrap: break-word;
+}
+
+.content-container {
+	min-height: 300px;
+}
+

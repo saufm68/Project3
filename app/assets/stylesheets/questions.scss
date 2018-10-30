@@ -18,5 +18,9 @@
 }
 
 .qna .item .content .right {
-  text-align: right;
+  float: right;
+}
+
+.ui.items > .item > .content p {
+  clear: both;
 }

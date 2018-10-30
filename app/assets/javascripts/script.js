@@ -11,5 +11,5 @@ window.onload = function() {
   });
 
   //progress bar increment
-  $('#level').progress('increment');
+  $('#level').progress();
 };
