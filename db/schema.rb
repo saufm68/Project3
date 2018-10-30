@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_30_014035) do
+ActiveRecord::Schema.define(version: 2018_10_30_030933) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,8 +23,10 @@ ActiveRecord::Schema.define(version: 2018_10_30_014035) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "answered"
+    t.bigint "upload_id"
     t.index ["profile_id"], name: "index_answers_on_profile_id"
     t.index ["question_id"], name: "index_answers_on_question_id"
+    t.index ["upload_id"], name: "index_answers_on_upload_id"
   end
 
   create_table "bookmarks", force: :cascade do |t|
@@ -61,14 +63,21 @@ ActiveRecord::Schema.define(version: 2018_10_30_014035) do
     t.bigint "profile_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "upload_id"
     t.index ["profile_id"], name: "index_questions_on_profile_id"
     t.index ["tag_id"], name: "index_questions_on_tag_id"
+    t.index ["upload_id"], name: "index_questions_on_upload_id"
   end
 
   create_table "tags", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "uploads", force: :cascade do |t|
+    t.string "name"
+    t.string "url"
   end
 
   create_table "users", force: :cascade do |t|
@@ -91,4 +100,6 @@ ActiveRecord::Schema.define(version: 2018_10_30_014035) do
     t.index ["playlist_id"], name: "index_videos_on_playlist_id"
   end
 
+  add_foreign_key "answers", "uploads"
+  add_foreign_key "questions", "uploads"
 end
