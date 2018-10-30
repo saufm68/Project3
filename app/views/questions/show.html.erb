@@ -1,17 +1,18 @@
-<div class="ui right aligned container">
-
-  <% if @bookmark %>
-    <%= link_to bookmark_path(@bookmark, question_id: @question.id), class: "ui labeled icon grey button", method: :delete do %>
-      <i class='bookmark icon'></i>
-      Bookmarked
-    <% end %>
-  <% else %>
-    <%= link_to bookmarks_path(profile_id: current_user.id, question_id: @question.id), class: "ui labeled icon blue button", method: :post do %>
-      <i class='bookmark icon'></i>
-      Bookmark
-    <% end %>
-  <% end %>
-</div>
+<% if user_signed_in? %>
+	<div class="ui right aligned container">
+	  <% if @bookmark %>
+	    <%= link_to bookmark_path(@bookmark, question_id: @question.id), class: "ui labeled icon grey button", method: :delete do %>
+	      <i class='bookmark icon'></i>
+	      Bookmarked
+	    <% end %>
+	  <% else %>
+	    <%= link_to bookmarks_path(profile_id: current_user.id, question_id: @question.id), class: "ui labeled icon blue button", method: :post do %>
+	      <i class='bookmark icon'></i>
+	      Bookmark
+	    <% end %>
+	  <% end %>
+	</div>
+<% end %>
 
 <div class="ui grid">
   <div class="row author">
@@ -98,7 +99,9 @@
     </div>
   <% end %>
 
-  <% @answers.each do |answer| %>
+  <% sorted_answers = @answers.sort { |a, b| b.vote <=> a.vote } %>
+
+  <% sorted_answers.each do |answer| %>
     <%# Avatar is on the left if the reply is written by the author of the question %>
     <%# Otherwise, the avatar is on the right %>
     <% if answer.profile.id != @question.profile.id %>

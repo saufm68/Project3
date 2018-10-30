@@ -18,7 +18,9 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @bookmark = Bookmark.find_by(profile_id: current_user.id, question_id: params[:id])
+    if user_signed_in?
+      @bookmark = Bookmark.find_by(profile_id: current_user.id, question_id: params[:id])
+    end
     @question = Question.find(params[:id])
     @answer = Answer.new
     @correctAnswer = Answer.find_by(question_id: @question.id, answered: true)
