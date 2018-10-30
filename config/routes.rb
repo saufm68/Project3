@@ -4,11 +4,21 @@ Rails.application.routes.draw do
 
   resources :questions do
     resources :answers
+    resources :bookmarks
+  end
+
+  resources :bookmarks do
+    resources :questions
+    resources :profiles
   end
 
   resources :answers
 
-  resources :profiles, except: :edit
+  resources :profiles, except: :edit do
+    resources :bookmarks
+    resources :questions
+    resources :answers
+  end
 
   resources :playlists do
     resources :videos

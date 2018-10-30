@@ -1,3 +1,12 @@
+<div class="ui right aligned container">
+	<% if @question.profile.bookmarks.questions.include(@question) %>
+		<%= link_to bookmarks_path(profile_id: @question.profile.id, question_id: @question.id), class: "ui labeled icon blue button", method: :post do %>
+			<i class='bookmark icon'></i>
+			Bookmark
+		<% end %>
+	<% end %>
+</div>
+
 <div class="ui grid">
   <div class="row author">
 
