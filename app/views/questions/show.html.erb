@@ -183,12 +183,17 @@
 
 <%= form_with model: @answer, local: true, class: "reply" do |form| %>
   <%= form.hidden_field :question_id, value: @question.id %>
+	<div class="upload">
+		<%= form.label :media do %>
+			<i class="circular upload link icon"></i>
+		<% end %>
+		<%= form.file_field :media, accept: 'image/png,image/gif,image/jpeg, image/jpg' %>
+	</div>
   <div class="ui fluid action input">
     <%= form.text_field :description, required: true, placeholder: "Type your answer here." %>
     <button class="ui teal right labeled icon button">
       <i class="arrow right icon"></i>
       Reply
     </button>
-    <%= form.file_field :media, accept: 'image/png,image/gif,image/jpeg, image/jpg' %>
   </div>
 <% end %>

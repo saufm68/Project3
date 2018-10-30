@@ -5,7 +5,7 @@
 .reply {
   position: fixed;
   width: 50%;
-  bottom: 2em;
+  bottom: 1em;
 }
 
 .ui.grid > .replies {
@@ -23,4 +23,20 @@
 
 .ui.items > .item > .content p {
   clear: both;
+}
+
+.upload > input {
+  display: none;
+}
+
+.upload {
+  position: absolute;
+  right: 18%;
+  top: 50%;
+  transform: translate(0, -50%);
+  z-index: 999;
+}
+
+.ui.action.input:not([class*='left action']) > input {
+  padding-right: 50px;
 }
