@@ -78,6 +78,9 @@
                   <%= image_tag @correctAnswer.media.url %>
                 </div>
               <% end %>
+                <%= link_to answer_path(@correctAnswer, purpose: 'upvote'), class: "circular ui icon mini red button floated right", data: {tooltip: "Upvote: #{@correctAnswer.vote}", position: 'top center' }, method: :put do %>
+                	<i class="arrow up icon"></i>
+                <% end %>
             </div>
           </div>
         </div>
@@ -123,6 +126,9 @@
                   <%= link_to answer_path(answer), class: "circular ui icon mini green button floated right", method: :put do %>
                     <i class="check icon"></i>
                   <% end %>
+                <% end %>
+                <%= link_to answer_path(answer, purpose: 'upvote'), class: "circular ui icon mini red button floated right", data: {tooltip: "Upvote: #{answer.vote}", position: 'top center' }, method: :put do %>
+                	<i class="arrow up icon"></i>
                 <% end %>
               </div>
             </div>
@@ -171,6 +177,9 @@
                   <div class="ui small image media">
                     <%= image_tag answer.media.url %>
                   </div>
+                <% end %>
+                <%= link_to answer_path(answer, purpose: 'upvote'), class: "circular ui icon mini red button floated left", data: {tooltip: "Upvote: #{answer.vote}", position: 'top center' }, method: :put do %>
+                	<i class="arrow up icon"></i>
                 <% end %>
               </div>
             </div>
