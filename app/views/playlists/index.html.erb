@@ -1,23 +1,49 @@
-<h1>All classes</h1>
+<h1>Your Playlist</h1>
 
+
+
+
+
+<%# testing out the accordion %>
+<div class="ui styled fluid accordion">
 
 <% @playlist.each do |playlist|%>
-	<div>
-		<%= link_to playlist.name, playlist_videos_path(playlist) %>
+	<div class="title">
+		<i class="dropdown-button teal dropdown middle aligned icon"></i>
+		<a class="header"><%= link_to playlist.name, playlist_videos_path(playlist) %></a>
 
-		<%= link_to 'Delete Playlist', playlist_path(playlist),
+		<%# Icons to delete playlists %>
+		<%= link_to playlist_path(playlist),
 			method: :delete,
-			data: { confirm: 'Are you sure?' }  %>
+			data: { confirm: 'Are you sure?' } do %>
+		<i class="teal delete right floated icon link"></i>
+		<% end %>
+	</div>
+
+
+	<div class="content">
+
+		<%# Name of each playlist %>
+		<p class="transition hidden">test</p>
+		<%# display dropdown of each video %>
+		<div class="transition hidden">
+    <% playlist.videos.each do |video| %>
+    <p><%= video.video_url%></p>
+    <p>videos</p>
+    <% end %>
+  	</div>
 
 	</div>
+
 <%end%>
 
-<%#= link_to 'Add Playlist', new_playlist_path %>
+</div>
+
 
 
 
 <div>
-<button id="display-create-form">Add Playlist</button>
+<button id="create-button">Add Playlist</button>
 
 <div id="create-form" style="display:none">
 <%= form_with scope: :playlist, url: playlists_path, local: true do |form| %>
@@ -33,6 +59,40 @@
 <% end %>
 
 </div>
+</div>
+
+
+
+<div class="ui divided list">
+
+<% @playlist.each do |playlist|%>
+	<div class="item">
+		<i class="dropdown-button teal dropdown middle aligned icon"></i>
+		<div class="content">
+
+		<%# Name of each playlist %>
+		<a class="header"><%= link_to playlist.name, playlist_videos_path(playlist) %></a>
+
+		<%# display dropdown of each video %>
+		<div class="display-preview-videos" style="display:none">
+    <% playlist.videos.each do |video| %>
+    <%= video.video_url%>
+    <% end %>
+  	</div>
+
+		<%= link_to playlist_path(playlist),
+			method: :delete,
+			data: { confirm: 'Are you sure?' } do %>
+		<i class="teal delete right floated icon link"></i>
+
+
+		<% end %>
+
+		</div>
+	</div>
+<%end%>
+
+<%#= link_to 'Add Playlist', new_playlist_path %>
 </div>
 
 
@@ -53,20 +113,59 @@
 </div>
 
 <script>
-	displayPlaylist = document.getElementById('display-create-form')
+
+//Dom for Add playlist, displays form when add playlist button is clicked
+	createButton = document.getElementById('create-button')
 
 	createForm = document.getElementById('create-form')
 
-	displayPlaylist.addEventListener('click', function(event){
+	createButton.addEventListener('click', function(event){
 		if(createForm.style.display !== "none"){
 		createForm.style.display ="none"
 		}
 		else
 		createForm.style.display ="block"
-
 	})
+
+//Dom for dropdown of playlist, displays preview pictures of youtube videos
+
+	// dropDownButton = document.getElementsByClassName('dropdown-button')
+
+	// //this returns a list of video data for specific for each playlist
+	// videoPreviews = document.getElementsByClassName('display-preview-videos')
+
+	// //attach event click event for each item in playlist
+	// Array.prototype.forEach.call(dropDownButton, function(element){
+
+	// 	element.addEventListener('click', function(event){
+
+
+	// 	// videoPreviews.style.display = "block"
+
+	// 	console.log(event.target)
+	// 	})
+
+	// })
+
+	// let array = [1,2,3]
+	// array.forEach(function(element){
+	// 	console.log(element)
+	// })
+
+
 
 
 
 
 </script>
+
+
+<script src="js/vendor/jquery-1.11.2.min.js"></script>
+<script src="js/accordion.js"></script>
+<script language='javascript'>
+             $(document).ready(function(){
+                $('.ui.accordion').accordion();
+             });
+</script>
+
+
