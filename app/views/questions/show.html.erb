@@ -1,10 +1,18 @@
 <div class="ui right aligned container">
-	<% if @question.profile.bookmarks.questions.include(@question) %>
-		<%= link_to bookmarks_path(profile_id: @question.profile.id, question_id: @question.id), class: "ui labeled icon blue button", method: :post do %>
-			<i class='bookmark icon'></i>
-			Bookmark
-		<% end %>
-	<% end %>
+  <%# if @question.profile.bookmarks.questions.include(@question) %>
+    <%= link_to bookmarks_path(profile_id: @question.profile.id, question_id: @question.id), class: "ui labeled icon blue button", method: :post do %>
+      <i class='bookmark icon'></i>
+      Bookmark
+    <% end %>
+  <%# end %>
+</div>
+
+<div class="ui basic modal">
+  <div class="ui fluid image">
+    <div class="image content">
+      <%= image_tag "" %>
+    </div>
+  </div>
 </div>
 
 <div class="ui grid">
@@ -66,6 +74,11 @@
             </span>
             <div class="description">
               <p><%= @correctAnswer.description %></p>
+              <% if @correctAnswer.media.url %>
+                <div class="ui small image media">
+                  <%= image_tag @correctAnswer.media.url %>
+                </div>
+              <% end %>
             </div>
           </div>
         </div>
@@ -100,6 +113,11 @@
               </span>
               <div class="description">
                 <p><%= answer.description %></p>
+                <% if answer.media.url %>
+                  <div class="ui small image media">
+                    <%= image_tag answer.media.url %>
+                  </div>
+                <% end %>
                 <% if !@correctAnswer && current_user.profile == @question.profile %>
                   <%= link_to answer_path(answer), class: "circular ui icon mini green button floated right", method: :put do %>
                     <i class="check icon"></i>
@@ -148,6 +166,11 @@
               </div>
               <div class="description">
                 <p><%= answer.description %></p>
+                <% if answer.media.url %>
+                  <div class="ui small image media">
+                    <%= image_tag answer.media.url %>
+                  </div>
+                <% end %>
               </div>
             </div>
           </div>
@@ -166,5 +189,6 @@
       <i class="arrow right icon"></i>
       Reply
     </button>
+    <%= form.file_field :media, accept: 'image/png,image/gif,image/jpeg, image/jpg' %>
   </div>
 <% end %>

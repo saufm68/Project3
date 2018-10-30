@@ -6,7 +6,8 @@ class AnswersController < ApplicationController
       description: answer_params[:description],
       vote: 0,
       profile: current_user.profile,
-      question: question
+      question: question,
+      media: answer_params[:media]
     )
     @answer.save
     redirect_to question
@@ -36,7 +37,7 @@ class AnswersController < ApplicationController
   private
 
   def answer_params
-    params.require(:answer).permit(:question_id, :description)
+    params.require(:answer).permit(:question_id, :description, :media)
   end
 
 end
