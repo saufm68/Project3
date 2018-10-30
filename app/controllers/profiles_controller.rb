@@ -6,6 +6,11 @@ class ProfilesController < ApplicationController
 
   def show
     @profile = Profile.find(params[:id])
+    @bookmark = Bookmark.where(profile_id: params[:id])
+    @bookmarked_question = []
+    @bookmark.each do |e|
+      @bookmarked_question << Question.find(e.question_id)
+    end
   end
 
   def edit
