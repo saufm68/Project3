@@ -12,7 +12,29 @@
 	</div>
 <%end%>
 
-<%= link_to 'Add Playlist', new_playlist_path %>
+<%#= link_to 'Add Playlist', new_playlist_path %>
+
+
+
+<div>
+<button id="display-create-form">Add Playlist</button>
+
+<div id="create-form" style="display:none">
+<%= form_with scope: :playlist, url: playlists_path, local: true do |form| %>
+
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_area :name %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+</div>
+</div>
+
 
 <div>
 
@@ -29,3 +51,25 @@
 <div>
 	<h2>Advanced</h2>
 </div>
+
+<script>
+	displayPlaylist = document.getElementById('display-create-form')
+
+	createForm = document.getElementById('create-form')
+
+	displayPlaylist.addEventListener('click', function(event){
+		if(createForm.style.display !== "none"){
+		createForm.style.display ="none"
+		}
+		else
+		createForm.style.display ="block"
+
+
+
+		console.log('display!')
+	})
+
+
+
+
+</script>

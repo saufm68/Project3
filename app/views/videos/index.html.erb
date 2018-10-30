@@ -12,7 +12,9 @@
 <%end%>
 
 
-<h1>Add Video</h1>
+<button>Add Video</button>
+
+<div id="add-video-form">
 <%= form_with scope: :video, url: playlist_videos_path(@playlist.id), local: true do |form| %>
 
   <p>
@@ -28,5 +30,7 @@
     <%= form.submit %>
   </p>
 <% end %>
+
+</div>
 
 <%= link_to 'Back to Playlist', playlists_path %>

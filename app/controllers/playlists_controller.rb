@@ -22,10 +22,13 @@ class PlaylistsController < ApplicationController
 
   def destroy
     # @playlist = Playlist.find(params[:id])
-    @playlist = Playlist.find(playlist_params)
+
+    # puts params[id]
+    @playlists = Playlist.all
+    @playlist = @playlists.find_by(id:params[:id])
     @playlist.destroy
 
-    redirect_to playlist
+    redirect_to playlists_path
   end
 
   private
