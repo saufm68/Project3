@@ -1,31 +1,25 @@
-<h1>Settings</h1>
+<h1>Profile Settings</h1>
 
-<h2 class="ui top attached header">
-  Profile
-</h2>
 <div class="ui attached segment">
-	<%= form_with model: @profile, class: 'ui form', local: true do |form| %>
-		<div class='field'>
-			<h3>Username:</h3>
-			<%= form.text_field :username, required: true %>
-		</div>
-		<%= form.submit 'Change', class: 'ui button'  %>
-	<% end %>
-	<br>
-	<%= form_with model: @profile, class: 'ui form', local: true do |form| %>
-		<div class='field'>
-			<h3>Biography:</h3>
-			<%= form.text_area :bio, placeholder: 'Enter a short biography of yourself', maxlength: 204, rows: 4 %>
-		</div>
-		<%= form.submit 'Change', class: 'ui button' %>
-	<% end %>
-	<br>
-	<%= link_to profile_path(current_user) do %>
-		<button class="ui button">Profile</button>
-	<% end %>
+  <%= form_with model: @profile, class: 'ui large form', local: true do |form| %>
+    <div class="field">
+      <%= form.label :photo_url, 'Avatar' %>
+      <%= form.file_field :photo_url, accept: 'image/png,image/gif,image/jpeg, image/jpg' %>
+    </div>
+    <div class='field'>
+      <%= form.label :username %>
+      <%= form.text_field :username, required: true %>
+    </div>
+    <div class='field'>
+      <%= form.label :bio, 'Biography' %>
+      <%= form.text_area :bio, placeholder: 'Enter a short biography of yourself', maxlength: 204, rows: 4 %>
+    </div>
+    <%= form.submit 'Update', class: 'ui blue button' %>
+    <%= link_to profile_path(current_user.profile) do %>
+      <button class="ui grey button">Cancel</button>
+    <% end %>
+    <%= link_to registration_path(current_user), data: { confirm: "Do you want to delete your account? Once deleted, account cannot be retrieved." }, method: :delete, class: "right" do %>
+      <button class="negative ui button delete-account right floated">Delete Account</button>
+    <% end %>
+  <% end %>
 </div>
-<br>
-<%= link_to registration_path(current_user), data: { confirm: "Do you want to delete your account? Once deleted, account cannot be retrieved." }, method: :delete do %>
-<button class="negative ui button delete-account">Delete Account</button>
-<% end %>
-

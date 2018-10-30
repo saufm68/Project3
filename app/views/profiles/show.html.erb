@@ -16,14 +16,14 @@
 				          </div>
 				        </div>
 				      </div>
-				      <%= image_tag @profile.photo_url %>
+				      <%= image_tag @profile.photo_url.url %>
 				    </div>
 				  </div>
 				</div>
 			<% else %>
 				<div class="ui card">
 					<div class="image">
-						<%= image_tag @profile.photo_url %>
+						<%= image_tag @profile.photo_url.url %>
 					</div>
 				</div>
 			<% end %>
@@ -99,5 +99,3 @@
 		</div>
 	</div>
 </div>
-
-
