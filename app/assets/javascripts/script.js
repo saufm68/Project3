@@ -15,6 +15,12 @@ window.onload = function() {
 
   // Activate modal.
   $('.media').click(function() {
+    var img = $(this)
+      .find('img')
+      .attr('src');
+    $('.ui.modal')
+      .find('img')
+      .attr('src', img);
     $('.ui.modal').modal('show');
   });
 };

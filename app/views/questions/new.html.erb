@@ -18,7 +18,10 @@
       <%= form.label :description, "Description (optional)" %>
       <%= form.text_area :description, rows: 3, placeholder: "Write additional information." %>
     </div>
-    <%= form.file_field :media, accept: 'image/png,image/gif,image/jpeg, image/jpg' %>
+    <div class="field">
+      <%= form.label :media, "Image (optional)" %>
+      <%= form.file_field :media, accept: 'image/png,image/gif,image/jpeg, image/jpg' %>
+    </div>
     <%= form.submit "Submit", class: "ui primary button" %>
     <%= link_to "Cancel", questions_path, class: "ui button" %>
   <% end %>

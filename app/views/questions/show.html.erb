@@ -1,15 +1,16 @@
 <div class="ui right aligned container">
-	<% if @bookmark %>
-		<%= link_to bookmark_path(@bookmark, question_id: @question.id), class: "ui labeled icon grey button", method: :delete do %>
-			<i class='bookmark icon'></i>
-			Bookmarked
-		<% end %>
-	<% else %>
-		<%= link_to bookmarks_path(profile_id: current_user.id, question_id: @question.id), class: "ui labeled icon blue button", method: :post do %>
-			<i class='bookmark icon'></i>
-			Bookmark
-		<% end %>
-	<% end %>
+
+  <% if @bookmark %>
+    <%= link_to bookmark_path(@bookmark, question_id: @question.id), class: "ui labeled icon grey button", method: :delete do %>
+      <i class='bookmark icon'></i>
+      Bookmarked
+    <% end %>
+  <% else %>
+    <%= link_to bookmarks_path(profile_id: current_user.id, question_id: @question.id), class: "ui labeled icon blue button", method: :post do %>
+      <i class='bookmark icon'></i>
+      Bookmark
+    <% end %>
+  <% end %>
 </div>
 
 <div class="ui grid">
@@ -71,6 +72,11 @@
             </span>
             <div class="description">
               <p><%= @correctAnswer.description %></p>
+              <% if @correctAnswer.media.url %>
+                <div class="ui small image media">
+                  <%= image_tag @correctAnswer.media.url %>
+                </div>
+              <% end %>
             </div>
           </div>
         </div>
@@ -105,6 +111,11 @@
               </span>
               <div class="description">
                 <p><%= answer.description %></p>
+                <% if answer.media.url %>
+                  <div class="ui small image media">
+                    <%= image_tag answer.media.url %>
+                  </div>
+                <% end %>
                 <% if !@correctAnswer && current_user.profile == @question.profile %>
                   <%= link_to answer_path(answer), class: "circular ui icon mini green button floated right", method: :put do %>
                     <i class="check icon"></i>
@@ -153,6 +164,11 @@
               </div>
               <div class="description">
                 <p><%= answer.description %></p>
+                <% if answer.media.url %>
+                  <div class="ui small image media">
+                    <%= image_tag answer.media.url %>
+                  </div>
+                <% end %>
               </div>
             </div>
           </div>
@@ -165,6 +181,12 @@
 
 <%= form_with model: @answer, local: true, class: "reply" do |form| %>
   <%= form.hidden_field :question_id, value: @question.id %>
+  <div class="upload">
+    <%= form.label :media do %>
+      <i class="circular upload link icon"></i>
+    <% end %>
+    <%= form.file_field :media, accept: 'image/png,image/gif,image/jpeg, image/jpg' %>
+  </div>
   <div class="ui fluid action input">
     <%= form.text_field :description, required: true, placeholder: "Type your answer here." %>
     <button class="ui teal right labeled icon button">
