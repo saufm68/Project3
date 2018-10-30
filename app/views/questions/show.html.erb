@@ -1,3 +1,12 @@
+<div class="ui right aligned container">
+	<% if @question.profile.bookmarks.questions.include(@question) %>
+		<%= link_to bookmarks_path(profile_id: @question.profile.id, question_id: @question.id), class: "ui labeled icon blue button", method: :post do %>
+			<i class='bookmark icon'></i>
+			Bookmark
+		<% end %>
+	<% end %>
+</div>
+
 <div class="ui grid">
   <div class="row author">
 
@@ -26,6 +35,18 @@
           </div>
           <div class="description">
             <p><%= @question.description %></p>
+            <% if @question.media.url %>
+              <div class="ui small image media">
+                <%= image_tag @question.media.url %>
+              </div>
+              <div class="ui basic modal">
+                <div class="ui fluid image">
+                  <div class="image content">
+                    <%= image_tag @question.media.url %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>

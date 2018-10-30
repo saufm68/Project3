@@ -7,9 +7,14 @@ window.onload = function() {
 
   //dimmer to show video call button
   $('.special.cards .image').dimmer({
-    on: 'hover'
+    on: 'hover',
   });
 
   //progress bar increment
   $('#level').progress();
+
+  // Activate modal.
+  $('.media').click(function() {
+    $('.ui.modal').modal('show');
+  });
 };
