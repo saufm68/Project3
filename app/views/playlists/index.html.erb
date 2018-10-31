@@ -24,11 +24,20 @@
 	<div class="content">
 
 		<%# Name of each playlist %>
-		<p class="transition hidden">test</p>
+		<p class="transition hidden">testing function of content</p>
 		<%# display dropdown of each video %>
 		<div class="transition hidden">
     <% playlist.videos.each do |video| %>
     <p><%= video.video_url%></p>
+
+
+
+    <img src="https://img.youtube.com/vi/wpC9bz8Comw/0.jpg">
+
+		<iframe width="560" height="315" src=<%= video.video_url%> frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+
+
     <p>videos</p>
     <% end %>
   	</div>
@@ -38,6 +47,7 @@
 <%end%>
 
 </div>
+
 
 
 
@@ -77,6 +87,14 @@
 		<div class="display-preview-videos" style="display:none">
     <% playlist.videos.each do |video| %>
     <%= video.video_url%>
+
+    <img src="https://img.youtube.com/vi/wpC9bz8Comw/0.jpg">
+
+
+
+		<iframe width="560" height="315" src=<%= video.video_url%> frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+
     <% end %>
   	</div>
 
@@ -103,6 +121,15 @@
 	<iframe width="560" height="315" src="https://www.youtube.com/embed/FPf96GuWnfc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 </div>
+
+
+
+
+
+
+
+
+
 
 <div>
 	<h2>Intermediate</h2>
