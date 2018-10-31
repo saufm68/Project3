@@ -1,23 +1,38 @@
-<h1>Your Playlist</h1>
+<!-- <h1>Your Playlist
+
+<button class="circular ui icon basic button" ><i class="icon plus"></i></button> -->
+
+<!-- </h1> -->
+
+<h1>Your Playlist
+
+<!-- <div class="ui icon button" id="create-button" data-content="Add Playlist">
+	<i class="big icon add"></i>
+
+</div> -->
 
 
 
+<i class="small icon fitted add square" id="create-button" data-content="Add Playlist"></i>
 
+<i class="small icon fitted minus square outline" id="remove-button" data-content="Delete Playlist"></i>
 
-<%# testing out the accordion %>
+</h1>
+
 <div class="ui styled fluid accordion">
 
 <% @playlist.each do |playlist|%>
-	<div class="title">
+	<div class="title item">
 		<i class="dropdown-button teal dropdown middle aligned icon"></i>
 		<a class="header"><%= link_to playlist.name, playlist_videos_path(playlist) %></a>
 
 		<%# Icons to delete playlists %>
 		<%= link_to playlist_path(playlist),
+			class: "right floated",
 			method: :delete,
 			data: { confirm: 'Are you sure?' } do %>
-		<i class="teal delete right floated icon link"></i>
-		<% end %>
+			<i class="teal delete icon link delete-playlist-button" style="display: none"></i>
+			<% end %>
 	</div>
 
 
@@ -54,25 +69,62 @@
 
 
 
-<div>
-<button id="create-button">Add Playlist</button>
 
-<div id="create-form" style="display:none">
-<%= form_with scope: :playlist, url: playlists_path, local: true do |form| %>
 
-  <p>
-    <%= form.label :name %><br>
-    <%= form.text_area :name %>
-  </p>
 
-  <p>
-    <%= form.submit %>
-  </p>
-<% end %>
+
+
+
+<%# modal create form %>
+
+<div class="ui basic modal">
+  <div class="ui icon header">
+    <i class="signup icon"></i>
+    Creating New Playlist
+  </div>
+  <div class="content">
+
+	<%= form_with model: Playlist.new, url: playlists_path, class:"ui form" ,local: true do |form| %>
+
+		<div class="field">
+	    <%= form.label :name %>
+
+    <div class="ui pointing below teal basic label">
+      Name your new playlist
+    </div>
+	    <%= form.text_field :name, placeholder: 'name of playlist' %>
+
+		</div>
+
+	  <p>
+
+	  </p>
+
+
+	  <div class="actions">
+	    <div class="ui red basic cancel inverted button">
+	      <i class="remove icon"></i>
+	     Cancel
+	    </div>
+
+
+	      <%= form.submit  class:"ui green ok inverted button" %>
+
+
+	  </div>
+	<% end %>
+</div>
+
+
 
 </div>
-</div>
 
+
+
+
+<h2 class = "ui left-aligned icon header">
+	<i class="circular users icon"></i>
+</h2>
 
 
 <div class="ui divided list">
@@ -186,15 +238,116 @@
 
 
 
+
+//testing modals for adding playlist
+
+	createButton = document.getElementById('create-button')
+
+	createForm = document.getElementById('create-form')
+
+	createButton.addEventListener('click', function(event){
+				$('.ui.modal')
+				  .modal('show')
+				;
+	})
+
+	minusbutton = document.getElementById('remove-button')
+
+	deleteform = document.querySelectorAll('.delete-playlist-button')
+
+
+
+	minusbutton.addEventListener('click', function(event){
+		deleteform.forEach(function(item){
+			console.log(item)
+
+
+
+			if(item.style.display === "none"){
+				item.style.display= "inline"
+			}
+			else{
+				item.style.display = "none"
+			}
+
+
+
+		})
+
+	})
+
+
+//pop ups for create and remove playlist button
+
+$('#create-button')
+  .popup()
+;
+
+$('#remove-button')
+  .popup()
+;
+
+
+
+
 </script>
 
 
-<script src="js/vendor/jquery-1.11.2.min.js"></script>
-<script src="js/accordion.js"></script>
+<!-- <script src="js/vendor/jquery-1.11.2.min.js"></script> -->
+<!-- <script src="js/accordion.js"></script> -->
 <script language='javascript'>
              $(document).ready(function(){
                 $('.ui.accordion').accordion();
              });
 </script>
+
+
+<%# Other type of forms keeping it for reference %>
+<%
+=begin%>
+
+<%#test form %>
+	<%= form_with model: Playlist.new, url: playlists_path, class:"ui form" ,local: true do |form| %>
+
+		<div class="field">
+	    <%= form.label :name %>
+	    <%= form.text_area :name %>
+		</div>
+
+	  <p>
+	    <%= form.submit class:"ui button" %>
+	  </p>
+
+	<% end %>
+
+
+
+<div>
+
+
+<div id="create-form" style="display:block">
+<%= form_with model: Playlist.new, url: playlists_path, local: true do |form| %>
+
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_area :name %>
+  </p>
+
+  <p>
+    <%= form.submit "submit" %>
+  </p>
+<% end %>
+
+</div>
+</div>
+
+<%
+=end %>
+
+
+
+
+
+
 
 
