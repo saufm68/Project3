@@ -23,22 +23,19 @@
 
 	<div class="content">
 
-		<%# Name of each playlist %>
-		<p class="transition hidden">testing function of content</p>
 		<%# display dropdown of each video %>
 		<div class="transition hidden">
+
     <% playlist.videos.each do |video| %>
     <p><%= video.video_url%></p>
 
+		<% string = video.video_url %>
+		<% string.gsub!('www','img')%>
+		<% string = string.gsub!('embed','vi') << '/0.jpg'%>
+		<%string%>
 
+		<img src=<%string%>>
 
-    <img src="https://img.youtube.com/vi/wpC9bz8Comw/0.jpg">
-
-		<iframe width="560" height="315" src=<%= video.video_url%> frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
-
-
-    <p>videos</p>
     <% end %>
   	</div>
 
