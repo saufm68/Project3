@@ -24,6 +24,9 @@ window.onload = function() {
     $('.ui.modal').modal('show');
   });
 
+  //Activate Dropdown
+  $('.ui.dropdown').dropdown();
+
   // Display file name after selecting image or video file.
   $('.file').on('change', function() {
     $('.upload').hide();
