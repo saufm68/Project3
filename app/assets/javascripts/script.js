@@ -26,4 +26,18 @@ window.onload = function() {
 
   //Activate Dropdown
   $('.ui.dropdown').dropdown();
+
+  // Display file name after selecting image or video file.
+  $('.file').on('change', function() {
+    $('.upload').hide();
+    $('.reply .ui.image.label').css('display', 'inline-block');
+    $('.reply .ui.image.label .media').html(this.files[0].name);
+  });
+
+  // Show upload button and hide label if user clicks delete icon
+  $('.reply .ui.image.label .delete.icon').click(function() {
+    $('.reply .ui.image.label').css('display', 'none');
+    $('.file').val('');
+    $('.upload').show();
+  });
 };
