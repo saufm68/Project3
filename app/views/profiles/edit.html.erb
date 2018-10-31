@@ -23,3 +23,54 @@
     <% end %>
   <% end %>
 </div>
+
+<audio id="player" controls></audio>
+<button id="record">record</button>
+<button id="stop">Stop</button>
+<a id="download">Download</a>
+<script>
+  var player = document.getElementById('player');
+  var record = document.getElementById('record');
+  var stop = document.getElementById('stop');
+  var download = document.getElementById('download');
+
+
+  function recordMedia(stream) {
+
+  	var options = {mimeType: 'audio/webm'}
+  	var recorder = new MediaRecorder(stream, options);
+
+	  record.addEventListener('click', () => {
+	  	recorder.start();
+	  });
+
+	  stop.addEventListener('click', () => {
+	  	recorder.stop();
+	  });
+
+	  var chunks = [];
+
+	  recorder.onstop = function(e) {
+	    console.log("data available after MediaRecorder.stop() called.");
+
+	    var blob = new Blob(chunks, { 'type' : 'audio/wav' });
+	    var audioURL = window.URL.createObjectURL(blob);
+	    player.src = audioURL;
+	    download.href = audioURL
+	    download.download =  'test.wav'
+	    console.log(audioURL);
+	  };
+
+	  recorder.ondataavailable = function(e) {
+	    chunks.push(e.data);
+	  };
+
+	};
+
+  var handleSuccess = function(stream) {
+    player.srcObject = stream;
+  };
+
+	navigator.mediaDevices.getUserMedia({ audio: true, video: false}).then(recordMedia);
+
+</script>
