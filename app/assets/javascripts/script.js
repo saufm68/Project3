@@ -14,14 +14,14 @@ window.onload = function() {
   $('#level').progress();
 
   // Activate modal.
-  $('.media').click(function() {
+  $('.ui.small.image.media').click(function() {
     var img = $(this)
       .find('img')
       .attr('src');
     $('.ui.modal')
       .find('img')
       .attr('src', img);
-    $('.ui.modal').modal('show');
+    $('.ui.basic.modal').modal('show');
   });
 
   //Activate Dropdown

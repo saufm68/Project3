@@ -2,6 +2,14 @@
   background-color: rgba(240, 240, 240, 0.5);
 }
 
+.ui.small.image.media {
+  margin-bottom: 0.5em;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 .reply {
   position: fixed;
   width: 50%;
