@@ -2,7 +2,8 @@ class VideosController < ApplicationController
 
   def index
     @playlist = Playlist.find(params[:playlist_id])
-    @video = Video.all
+    @video = @playlist.videos
+
 
   end
 
@@ -14,6 +15,7 @@ class VideosController < ApplicationController
   def create
     @video = Video.new(video_params)
     @video.save
+    # render plain: video_params.inspect
 
     @playlist = Playlist.find(params[:playlist_id])
 

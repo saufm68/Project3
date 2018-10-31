@@ -11,8 +11,9 @@
 	</div>
 <%end%>
 
+<button id="display-create-form-video">Add Video</button>
 
-<h1>Add Video</h1>
+<div id="add-video-form" style="display:none;">
 <%= form_with scope: :video, url: playlist_videos_path(@playlist.id), local: true do |form| %>
 
   <p>
@@ -20,10 +21,33 @@
     <%= form.text_area :video_url %>
   </p>
 
+	<p>
 	<%= form.hidden_field :playlist_id, :value => @playlist.id %>
+	</p>
+
   <p>
     <%= form.submit %>
   </p>
 <% end %>
 
+</div>
+
 <%= link_to 'Back to Playlist', playlists_path %>
+
+<script>
+	displayform = document.getElementById('display-create-form-video')
+	addVideoForm = document.getElementById('add-video-form')
+
+	displayform.addEventListener('click', function(event){
+
+		if(addVideoForm.style.display !== "none"){
+		addVideoForm.style.display ="none"
+		}
+		else
+		addVideoForm.style.display ="block"
+
+	})
+
+
+
+</script>

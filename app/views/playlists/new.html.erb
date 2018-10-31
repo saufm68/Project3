@@ -12,4 +12,28 @@
   </p>
 <% end %>
 
+
+
+<h1>Delete playlist</h1>
+<%= form_with scope: :playlist, url: playlist_path(@playlist), id: 'deleteoption', method: :delete, data: { confirm: 'Are you sure?' }, local: true do |form| %>
+
+  <%= form.collection_select :playlist_id, @playlist, :id, :name %>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
 <%= link_to 'Back', playlists_path %>
+
+<script>
+	select = document.getElementById('playlist_playlist_id')
+	console.log(select.value);
+	select.addEventListener('change', function(){
+	deleteform = document.getElementById('deleteoption')
+	deleteform.setAttribute('action', '/playlists/'+select.value)
+
+
+			console.log(select.value)
+	 })
+</script>
