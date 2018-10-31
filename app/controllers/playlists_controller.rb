@@ -2,8 +2,7 @@ class PlaylistsController < ApplicationController
 
   def index
     @playlist = Playlist.all
-
-
+    # @newPlaylist = Playlist.new
   end
 
 
