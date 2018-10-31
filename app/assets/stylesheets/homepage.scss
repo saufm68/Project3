@@ -1,13 +1,28 @@
 .landing-image {
-	position: relative;
-	z-index: 0;
-	background-color: red;
-	width: 100%;
-	height: 33em;
-	background-image: url('');
+  position: fixed;
+  z-index: 0;
+  background: url('malay.jpg') no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  width: 100vw;
+  height: 60vh;
+  left: 0;
+  top: 2em;
 }
 
-ui.card.option {
-	width: 300px;
-	height: 215px;
+.ui.grid.home {
+  position: absolute;
+  top: 50vh;
+  .ui.card.option {
+    height: 215px;
+  }
+
+  .ui.card.option.right {
+    float: right;
+  }
+
+  .footer {
+    padding-top: 1em;
+    text-align: center;
+  }
 }
