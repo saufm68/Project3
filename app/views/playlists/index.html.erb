@@ -1,18 +1,118 @@
-<h1>All classes</h1>
+<h1>Your Playlist</h1>
 
+
+
+
+
+<%# testing out the accordion %>
+<div class="ui styled fluid accordion">
 
 <% @playlist.each do |playlist|%>
-	<div>
-		<%= link_to playlist.name, playlist_videos_path(playlist) %>
+	<div class="title">
+		<i class="dropdown-button teal dropdown middle aligned icon"></i>
+		<a class="header"><%= link_to playlist.name, playlist_videos_path(playlist) %></a>
 
-		<%= link_to 'Delete Playlist', playlist_path(playlist),
+		<%# Icons to delete playlists %>
+		<%= link_to playlist_path(playlist),
 			method: :delete,
-			data: { confirm: 'Are you sure?' }  %>
+			data: { confirm: 'Are you sure?' } do %>
+		<i class="teal delete right floated icon link"></i>
+		<% end %>
+	</div>
 
+
+	<div class="content">
+
+		<%# Name of each playlist %>
+		<p class="transition hidden">testing function of content</p>
+		<%# display dropdown of each video %>
+		<div class="transition hidden">
+    <% playlist.videos.each do |video| %>
+    <p><%= video.video_url%></p>
+
+
+
+    <img src="https://img.youtube.com/vi/wpC9bz8Comw/0.jpg">
+
+		<iframe width="560" height="315" src=<%= video.video_url%> frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+
+
+    <p>videos</p>
+    <% end %>
+  	</div>
+
+	</div>
+
+<%end%>
+
+</div>
+
+
+
+
+
+<div>
+<button id="create-button">Add Playlist</button>
+
+<div id="create-form" style="display:none">
+<%= form_with scope: :playlist, url: playlists_path, local: true do |form| %>
+
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_area :name %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+</div>
+</div>
+
+
+
+<div class="ui divided list">
+
+<% @playlist.each do |playlist|%>
+	<div class="item">
+		<i class="dropdown-button teal dropdown middle aligned icon"></i>
+		<div class="content">
+
+		<%# Name of each playlist %>
+		<a class="header"><%= link_to playlist.name, playlist_videos_path(playlist) %></a>
+
+		<%# display dropdown of each video %>
+		<div class="display-preview-videos" style="display:none">
+    <% playlist.videos.each do |video| %>
+    <%= video.video_url%>
+
+    <img src="https://img.youtube.com/vi/wpC9bz8Comw/0.jpg">
+
+
+
+		<iframe width="560" height="315" src=<%= video.video_url%> frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+
+    <% end %>
+  	</div>
+
+		<%= link_to playlist_path(playlist),
+			method: :delete,
+			data: { confirm: 'Are you sure?' } do %>
+		<i class="teal delete right floated icon link"></i>
+
+
+		<% end %>
+
+		</div>
 	</div>
 <%end%>
 
-<%= link_to 'Add Playlist', new_playlist_path %>
+<%#= link_to 'Add Playlist', new_playlist_path %>
+</div>
+
 
 <div>
 
@@ -22,6 +122,15 @@
 
 </div>
 
+
+
+
+
+
+
+
+
+
 <div>
 	<h2>Intermediate</h2>
 </div>
@@ -29,3 +138,61 @@
 <div>
 	<h2>Advanced</h2>
 </div>
+
+<script>
+
+//Dom for Add playlist, displays form when add playlist button is clicked
+	createButton = document.getElementById('create-button')
+
+	createForm = document.getElementById('create-form')
+
+	createButton.addEventListener('click', function(event){
+		if(createForm.style.display !== "none"){
+		createForm.style.display ="none"
+		}
+		else
+		createForm.style.display ="block"
+	})
+
+//Dom for dropdown of playlist, displays preview pictures of youtube videos
+
+	// dropDownButton = document.getElementsByClassName('dropdown-button')
+
+	// //this returns a list of video data for specific for each playlist
+	// videoPreviews = document.getElementsByClassName('display-preview-videos')
+
+	// //attach event click event for each item in playlist
+	// Array.prototype.forEach.call(dropDownButton, function(element){
+
+	// 	element.addEventListener('click', function(event){
+
+
+	// 	// videoPreviews.style.display = "block"
+
+	// 	console.log(event.target)
+	// 	})
+
+	// })
+
+	// let array = [1,2,3]
+	// array.forEach(function(element){
+	// 	console.log(element)
+	// })
+
+
+
+
+
+
+</script>
+
+
+<script src="js/vendor/jquery-1.11.2.min.js"></script>
+<script src="js/accordion.js"></script>
+<script language='javascript'>
+             $(document).ready(function(){
+                $('.ui.accordion').accordion();
+             });
+</script>
+
+
