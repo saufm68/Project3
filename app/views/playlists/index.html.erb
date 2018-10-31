@@ -32,9 +32,10 @@
 		<% string = video.video_url %>
 		<% string.gsub!('www','img')%>
 		<% string = string.gsub!('embed','vi') << '/0.jpg'%>
-		<%string%>
 
 		<img src=<%string%>>
+		<%ul = 'www.google.com'%>
+		<img src=<%= string%>>
 
     <% end %>
   	</div>
