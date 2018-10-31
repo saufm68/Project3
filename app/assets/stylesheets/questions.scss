@@ -8,6 +8,12 @@
   height: 6em;
   bottom: 0;
   background: white;
+
+  .ui.image.label {
+    position: absolute;
+    top: 0;
+    display: none;
+  }
 }
 
 .ui.grid > .replies {
