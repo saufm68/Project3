@@ -61,48 +61,7 @@
   </div>
 
   <%# answers %>
-  <% if @correctAnswer %>
-    <div class="row answers">
-      <div class="ui segment items qna">
-        <div class="item">
-          <div class="content">
-            <span class="ui red ribbon label"><i class="chess queen icon"></i></span>
-            <span class="meta right">
-              <%= @correctAnswer.created_at.strftime("%F %T") %>
-            </span>
-            <div class="description">
-              <p><%= @correctAnswer.description %></p>
-              <% if @correctAnswer.media %>
-                <div class="ui small image media">
-                  <%= cl_image_tag(@correctAnswer.media)%>
-                </div>
-              <% end %>
-              <div>
-                <%= link_to answer_path(@correctAnswer, purpose: 'upvote'), class: "circular ui icon mini red button floated right", data: {tooltip: "Upvote: #{@correctAnswer.vote}", position: 'top center' }, method: :put do %>
-                  <i class="arrow up icon"></i>
-                <% end %>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="two wide column center aligned">
-        <div class="item" data-tooltip="<%= @correctAnswer.profile.username %>" data-position="top center">
-          <a href="<%= profile_path(@correctAnswer.profile) %>">
-            <%= cl_image_tag(@question.profile.photo_url, class: "ui avatar image") %>
-          </a>
-          <div class="content">
-            <div class="sub header">Lv. <%= @correctAnswer.profile.level %></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  <% end %>
-
-  <% sorted_answers = @answers.sort { |a, b| b.vote <=> a.vote } %>
-
-  <% sorted_answers.each do |answer| %>
+  <% @answers.each do |answer| %>
     <%# Avatar is on the left if the reply is written by the author of the question %>
     <%# Otherwise, the avatar is on the right %>
     <% if answer.profile.id != @question.profile.id %>
@@ -110,6 +69,9 @@
         <div class="ui segment items qna">
           <div class="item">
             <div class="content">
+            	<% if answer.answered %>
+            		<span class="ui red ribbon label"><i class="chess queen icon"></i></span>
+            	<% end %>
               <span class="meta right">
                 <%= answer.created_at.strftime("%F %T") %>
               </span>
