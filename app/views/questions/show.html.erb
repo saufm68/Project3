@@ -23,7 +23,7 @@
 </div>
 
 <div class="ui grid">
-  <div class="row author">
+  <div class="row">
 
     <div class="two wide column center aligned">
       <div class="item" data-tooltip="<%= @question.profile.username %>" data-position="top center">
@@ -40,11 +40,11 @@
     <div class="ui segment items qna">
       <div class="item">
         <div class="content">
-          <div class="header">
-            <%= @question.title %>
-          </div>
           <div class="meta">
             <%= @question.created_at.strftime("%F %T") %>
+          </div>
+          <div class="header">
+            <%= @question.title %>
           </div>
           <div class="description">
             <p><%= @question.description %></p>
@@ -62,7 +62,7 @@
 
   <%# answers %>
   <% if @correctAnswer %>
-    <div class="row replies">
+    <div class="row answers">
       <div class="ui segment items qna">
         <div class="item">
           <div class="content">
@@ -106,7 +106,7 @@
     <%# Avatar is on the left if the reply is written by the author of the question %>
     <%# Otherwise, the avatar is on the right %>
     <% if answer.profile.id != @question.profile.id %>
-      <div class="row replies">
+      <div class="row answers">
         <div class="ui segment items qna">
           <div class="item">
             <div class="content">
@@ -122,7 +122,7 @@
                 <% end %>
                 <div>
                 <% if !@correctAnswer && current_user.profile == @question.profile %>
-                  <%= link_to answer_path(answer), class: "circular ui icon mini green button floated right", method: :put do %>
+                  <%= link_to answer_path(answer), class: "circular ui icon mini green button floated right", data: {tooltip: "Accept", position: 'top center' }, method: :put do %>
                     <i class="check icon"></i>
                   <% end %>
                 <% end %>
@@ -149,7 +149,7 @@
         </div>
       </div>
     <% else %>
-      <div class="row author">
+      <div class="row">
         <div class="two wide column center aligned">
           <div class="item" data-tooltip="<%= answer.profile.username %>" data-position="top center">
             <a href="<%= profile_path(answer.profile) %>">
@@ -191,14 +191,14 @@
 
 <%= form_with model: @answer, local: true, class: "reply" do |form| %>
   <%= form.hidden_field :question_id, value: @question.id %>
-  <div class="upload">
-    <%= form.label :media do %>
-      <i class="circular upload link icon"></i>
-    <% end %>
-    <%= form.file_field :media, class: "file", accept: 'image/png,image/gif,image/jpeg, image/jpg' %>
-  </div>
   <div class="ui fluid action input">
     <%= form.text_field :description, required: true, placeholder: "Type your answer here." %>
+    <div class="upload">
+      <%= form.label :media do %>
+        <i class="circular upload link icon"></i>
+      <% end %>
+      <%= form.file_field :media, class: "file", accept: 'image/png,image/gif,image/jpeg, image/jpg' %>
+    </div>
     <button class="ui teal right labeled icon button">
       <i class="arrow right icon"></i>
       Reply
