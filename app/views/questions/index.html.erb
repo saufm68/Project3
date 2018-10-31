@@ -50,7 +50,7 @@
   search.addEventListener('input', () => {
     Array.prototype.forEach.call(allQuestions, (e) => {
       e.parentNode.parentNode.style.display = 'block';
-      if (e.innerHTML.includes(search.value) === false) {
+      if (e.innerHTML.toLowerCase().includes(search.value.toLowerCase()) === false) {
         e.parentNode.parentNode.style.display = 'none';
       }
     });
