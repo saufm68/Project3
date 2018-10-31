@@ -22,6 +22,10 @@ class ProfilesController < ApplicationController
     params = profile_params
     if params[:photo_url].nil?
       params[:photo_url] = @profile.photo_url
+    else
+      file = params[:photo_url].path
+      cloudinary_file = Cloudinary::Uploader.upload(file)
+      params[:photo_url] = cloudinary_file['public_id']
     end
     @profile.update(params)
     redirect_to @profile

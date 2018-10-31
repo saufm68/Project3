@@ -28,10 +28,8 @@
     <div class="two wide column center aligned">
       <div class="item" data-tooltip="<%= @question.profile.username %>" data-position="top center">
         <a href="<%= profile_path(@question.profile) %>">
-          <img
-            class="ui tiny circular image"
-            src="<%= @question.profile.photo_url %>"
-            alt="Profile photo">
+          <%= cl_image_tag(@question.profile.photo_url, class: "ui avatar image") %>
+
         </a>
         <div class="content">
           <div class="sub header">Lv. <%= @question.profile.level %></div>
@@ -50,9 +48,9 @@
           </div>
           <div class="description">
             <p><%= @question.description %></p>
-            <% if @question.media.url %>
+            <% if @question.media %>
               <div class="ui small image media">
-                <%= image_tag @question.media.url %>
+                <%= cl_image_tag(@question.media)%>
               </div>
             <% end %>
           </div>
@@ -74,9 +72,9 @@
             </span>
             <div class="description">
               <p><%= @correctAnswer.description %></p>
-              <% if @correctAnswer.media.url %>
+              <% if @correctAnswer.media %>
                 <div class="ui small image media">
-                  <%= image_tag @correctAnswer.media.url %>
+                  <%= cl_image_tag(@correctAnswer.media)%>
                 </div>
               <% end %>
               <div>
@@ -92,10 +90,7 @@
       <div class="two wide column center aligned">
         <div class="item" data-tooltip="<%= @correctAnswer.profile.username %>" data-position="top center">
           <a href="<%= profile_path(@correctAnswer.profile) %>">
-            <img
-              class="ui tiny circular image"
-              src="<%= @correctAnswer.profile.photo_url %>"
-              alt="Profile photo">
+            <%= cl_image_tag(@question.profile.photo_url, class: "ui avatar image") %>
           </a>
           <div class="content">
             <div class="sub header">Lv. <%= @correctAnswer.profile.level %></div>
@@ -120,9 +115,9 @@
               </span>
               <div class="description">
                 <p><%= answer.description %></p>
-                <% if answer.media.url %>
+                <% if answer.media %>
                   <div class="ui small image media">
-                    <%= image_tag answer.media.url %>
+                    <%= cl_image_tag(answer.media) %>
                   </div>
                 <% end %>
                 <div>
@@ -131,9 +126,11 @@
                     <i class="check icon"></i>
                   <% end %>
                 <% end %>
-                <%= link_to answer_path(answer, purpose: 'upvote'), class: "circular ui icon mini red button floated right", data: {tooltip: "Upvote: #{answer.vote}", position: 'top center' }, method: :put do %>
-                  <i class="arrow up icon"></i>
-                <% end %>
+                <div>
+                  <%= link_to answer_path(answer, purpose: 'upvote'), class: "circular ui icon mini red button floated right", data: {tooltip: "Upvote: #{answer.vote}", position: 'top center' }, method: :put do %>
+                    <i class="arrow up icon"></i>
+                  <% end %>
+                </div>
                 </div>
               </div>
             </div>
@@ -143,10 +140,7 @@
         <div class="two wide column center aligned">
           <div class="item" data-tooltip="<%= answer.profile.username %>" data-position="top center">
             <a href="<%= profile_path(answer.profile) %>">
-              <img
-                class="ui tiny circular image"
-                src="<%= answer.profile.photo_url %>"
-                alt="Profile photo">
+              <%= cl_image_tag(@question.profile.photo_url, class: "ui avatar image") %>
             </a>
             <div class="content">
               <div class="sub header">Lv. <%= answer.profile.level %></div>
@@ -159,10 +153,7 @@
         <div class="two wide column center aligned">
           <div class="item" data-tooltip="<%= answer.profile.username %>" data-position="top center">
             <a href="<%= profile_path(answer.profile) %>">
-              <img
-                class="ui tiny circular image"
-                src="<%= answer.profile.photo_url %>"
-                alt="Profile photo">
+              <%= cl_image_tag(@question.profile.photo_url, class: "ui avatar image") %>
             </a>
             <div class="content">
               <div class="sub header">Lv. <%= answer.profile.level %></div>
@@ -178,14 +169,16 @@
               </div>
               <div class="description">
                 <p><%= answer.description %></p>
-                <% if answer.media.url %>
+                <% if answer.media %>
                   <div class="ui small image media">
-                    <%= image_tag answer.media.url %>
+                    <%= cl_image_tag(answer.media) %>
                   </div>
                 <% end %>
-                <%= link_to answer_path(answer, purpose: 'upvote'), class: "circular ui icon mini red button floated left", data: {tooltip: "Upvote: #{answer.vote}", position: 'top center' }, method: :put do %>
-                  <i class="arrow up icon"></i>
-                <% end %>
+                <div>
+                  <%= link_to answer_path(answer, purpose: 'upvote'), class: "circular ui icon mini red button floated left", data: {tooltip: "Upvote: #{answer.vote}", position: 'top center' }, method: :put do %>
+                    <i class="arrow up icon"></i>
+                  <% end %>
+                </div>
               </div>
             </div>
           </div>

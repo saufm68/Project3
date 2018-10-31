@@ -16,14 +16,14 @@
                   </div>
                 </div>
               </div>
-              <%= image_tag @profile.photo_url.url %>
+              <%= cl_image_tag(@profile.photo_url, :width=>290, :height=>290, :crop=>"scale") %>
             </div>
           </div>
         </div>
       <% else %>
         <div class="ui card">
           <div class="image">
-            <%= image_tag @profile.photo_url.url %>
+            <%= cl_image_tag(@profile.photo_url, :width=>290, :height=>290, :crop=>"scale") %>
           </div>
         </div>
       <% end %>
