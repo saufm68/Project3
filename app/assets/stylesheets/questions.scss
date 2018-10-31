@@ -5,7 +5,9 @@
 .reply {
   position: fixed;
   width: 50%;
-  bottom: 1em;
+  height: 6em;
+  bottom: 0;
+  background: white;
 }
 
 .ui.grid > .replies {
@@ -35,6 +37,14 @@
   top: 50%;
   transform: translate(0, -50%);
   z-index: 999;
+}
+
+.ui.action.input {
+  position: relative;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translate(0, -50%);
 }
 
 .ui.action.input:not([class*='left action']) > input {
