@@ -38,6 +38,7 @@
       <div class="content">
         <div class="header question-title <%= question.tag.name %>"><%= question.title %></div>
       </div>
+      <span class="question-category"><%= question.tag.name %></span>
     </a>
   <% end %>
 </div>
@@ -50,7 +51,7 @@
   search.addEventListener('input', () => {
     Array.prototype.forEach.call(allQuestions, (e) => {
       e.parentNode.parentNode.style.display = 'block';
-      if (e.innerHTML.includes(search.value) === false) {
+      if (e.innerHTML.toLowerCase().includes(search.value.toLowerCase()) === false) {
         e.parentNode.parentNode.style.display = 'none';
       }
     });
