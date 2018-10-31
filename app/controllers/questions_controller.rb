@@ -11,6 +11,11 @@ class QuestionsController < ApplicationController
   def create
     params = question_params
     params[:tag] = Tag.find_by(name: params[:tag])
+    if params[:media]
+      file = params[:media].path
+      cloudinary_file = Cloudinary::Uploader.upload(file)
+      params[:media] = cloudinary_file['public_id']
+    end
     @question = Question.new(params)
     @question.profile = current_user.profile
     @question.save
@@ -24,7 +29,7 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @answer = Answer.new
     @correctAnswer = Answer.find_by(question_id: @question.id, answered: true)
-    @answers = Answer.where(question_id: @question.id, answered: nil)
+    @answers = Answer.where(question_id: @question.id, answered: false)
   end
 
   def edit

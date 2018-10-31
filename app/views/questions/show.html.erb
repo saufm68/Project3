@@ -14,16 +14,22 @@
   </div>
 <% end %>
 
+<div class="ui basic modal">
+  <div class="ui fluid image">
+    <div class="image content">
+      <img src="">
+    </div>
+  </div>
+</div>
+
 <div class="ui grid">
-  <div class="row author">
+  <div class="row">
 
     <div class="two wide column center aligned">
       <div class="item" data-tooltip="<%= @question.profile.username %>" data-position="top center">
         <a href="<%= profile_path(@question.profile) %>">
-          <img
-            class="ui tiny circular image"
-            src="<%= @question.profile.photo_url %>"
-            alt="Profile photo">
+          <%= cl_image_tag(@question.profile.photo_url, class: "ui avatar image") %>
+
         </a>
         <div class="content">
           <div class="sub header">Lv. <%= @question.profile.level %></div>
@@ -34,24 +40,17 @@
     <div class="ui segment items qna">
       <div class="item">
         <div class="content">
-          <div class="header">
-            <%= @question.title %>
-          </div>
           <div class="meta">
             <%= @question.created_at.strftime("%F %T") %>
           </div>
+          <div class="header">
+            <%= @question.title %>
+          </div>
           <div class="description">
             <p><%= @question.description %></p>
-            <% if @question.media.url %>
+            <% if @question.media %>
               <div class="ui small image media">
-                <%= image_tag @question.media.url %>
-              </div>
-              <div class="ui basic modal">
-                <div class="ui fluid image">
-                  <div class="image content">
-                    <%= image_tag @question.media.url %>
-                  </div>
-                </div>
+                <%= cl_image_tag(@question.media)%>
               </div>
             <% end %>
           </div>
@@ -63,7 +62,7 @@
 
   <%# answers %>
   <% if @correctAnswer %>
-    <div class="row replies">
+    <div class="row answers">
       <div class="ui segment items qna">
         <div class="item">
           <div class="content">
@@ -73,14 +72,16 @@
             </span>
             <div class="description">
               <p><%= @correctAnswer.description %></p>
-              <% if @correctAnswer.media.url %>
+              <% if @correctAnswer.media %>
                 <div class="ui small image media">
-                  <%= image_tag @correctAnswer.media.url %>
+                  <%= cl_image_tag(@correctAnswer.media)%>
                 </div>
               <% end %>
+              <div>
                 <%= link_to answer_path(@correctAnswer, purpose: 'upvote'), class: "circular ui icon mini red button floated right", data: {tooltip: "Upvote: #{@correctAnswer.vote}", position: 'top center' }, method: :put do %>
                   <i class="arrow up icon"></i>
                 <% end %>
+              </div>
             </div>
           </div>
         </div>
@@ -89,10 +90,7 @@
       <div class="two wide column center aligned">
         <div class="item" data-tooltip="<%= @correctAnswer.profile.username %>" data-position="top center">
           <a href="<%= profile_path(@correctAnswer.profile) %>">
-            <img
-              class="ui tiny circular image"
-              src="<%= @correctAnswer.profile.photo_url %>"
-              alt="Profile photo">
+            <%= cl_image_tag(@question.profile.photo_url, class: "ui avatar image") %>
           </a>
           <div class="content">
             <div class="sub header">Lv. <%= @correctAnswer.profile.level %></div>
@@ -108,7 +106,7 @@
     <%# Avatar is on the left if the reply is written by the author of the question %>
     <%# Otherwise, the avatar is on the right %>
     <% if answer.profile.id != @question.profile.id %>
-      <div class="row replies">
+      <div class="row answers">
         <div class="ui segment items qna">
           <div class="item">
             <div class="content">
@@ -117,19 +115,23 @@
               </span>
               <div class="description">
                 <p><%= answer.description %></p>
-                <% if answer.media.url %>
+                <% if answer.media %>
                   <div class="ui small image media">
-                    <%= image_tag answer.media.url %>
+                    <%= cl_image_tag(answer.media) %>
                   </div>
                 <% end %>
+                <div>
                 <% if !@correctAnswer && current_user.profile == @question.profile %>
-                  <%= link_to answer_path(answer), class: "circular ui icon mini green button floated right", method: :put do %>
+                  <%= link_to answer_path(answer), class: "circular ui icon mini green button floated right", data: {tooltip: "Accept", position: 'top center' }, method: :put do %>
                     <i class="check icon"></i>
                   <% end %>
                 <% end %>
-                <%= link_to answer_path(answer, purpose: 'upvote'), class: "circular ui icon mini red button floated right", data: {tooltip: "Upvote: #{answer.vote}", position: 'top center' }, method: :put do %>
-                  <i class="arrow up icon"></i>
-                <% end %>
+                <div>
+                  <%= link_to answer_path(answer, purpose: 'upvote'), class: "circular ui icon mini red button floated right", data: {tooltip: "Upvote: #{answer.vote}", position: 'top center' }, method: :put do %>
+                    <i class="arrow up icon"></i>
+                  <% end %>
+                </div>
+                </div>
               </div>
             </div>
           </div>
@@ -138,10 +140,7 @@
         <div class="two wide column center aligned">
           <div class="item" data-tooltip="<%= answer.profile.username %>" data-position="top center">
             <a href="<%= profile_path(answer.profile) %>">
-              <img
-                class="ui tiny circular image"
-                src="<%= answer.profile.photo_url %>"
-                alt="Profile photo">
+              <%= cl_image_tag(@question.profile.photo_url, class: "ui avatar image") %>
             </a>
             <div class="content">
               <div class="sub header">Lv. <%= answer.profile.level %></div>
@@ -150,14 +149,11 @@
         </div>
       </div>
     <% else %>
-      <div class="row author">
+      <div class="row">
         <div class="two wide column center aligned">
           <div class="item" data-tooltip="<%= answer.profile.username %>" data-position="top center">
             <a href="<%= profile_path(answer.profile) %>">
-              <img
-                class="ui tiny circular image"
-                src="<%= answer.profile.photo_url %>"
-                alt="Profile photo">
+              <%= cl_image_tag(@question.profile.photo_url, class: "ui avatar image") %>
             </a>
             <div class="content">
               <div class="sub header">Lv. <%= answer.profile.level %></div>
@@ -173,14 +169,16 @@
               </div>
               <div class="description">
                 <p><%= answer.description %></p>
-                <% if answer.media.url %>
+                <% if answer.media %>
                   <div class="ui small image media">
-                    <%= image_tag answer.media.url %>
+                    <%= cl_image_tag(answer.media) %>
                   </div>
                 <% end %>
-                <%= link_to answer_path(answer, purpose: 'upvote'), class: "circular ui icon mini red button floated left", data: {tooltip: "Upvote: #{answer.vote}", position: 'top center' }, method: :put do %>
-                  <i class="arrow up icon"></i>
-                <% end %>
+                <div>
+                  <%= link_to answer_path(answer, purpose: 'upvote'), class: "circular ui icon mini red button floated left", data: {tooltip: "Upvote: #{answer.vote}", position: 'top center' }, method: :put do %>
+                    <i class="arrow up icon"></i>
+                  <% end %>
+                </div>
               </div>
             </div>
           </div>
@@ -193,14 +191,14 @@
 
 <%= form_with model: @answer, local: true, class: "reply" do |form| %>
   <%= form.hidden_field :question_id, value: @question.id %>
-  <div class="upload">
-    <%= form.label :media do %>
-      <i class="circular upload link icon"></i>
-    <% end %>
-    <%= form.file_field :media, class: "file", accept: 'image/png,image/gif,image/jpeg, image/jpg' %>
-  </div>
   <div class="ui fluid action input">
     <%= form.text_field :description, required: true, placeholder: "Type your answer here." %>
+    <div class="upload">
+      <%= form.label :media do %>
+        <i class="circular upload link icon"></i>
+      <% end %>
+      <%= form.file_field :media, class: "file", accept: 'image/png,image/gif,image/jpeg, image/jpg' %>
+    </div>
     <button class="ui teal right labeled icon button">
       <i class="arrow right icon"></i>
       Reply

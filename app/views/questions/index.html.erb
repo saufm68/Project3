@@ -34,7 +34,7 @@
 <div class="ui large middle aligned divided animated list">
   <% @questions.each do |question| %>
     <a href="<%= question_path(question) %>" class="item question">
-      <img class="ui avatar image" src="<%= question.profile.photo_url %>">
+      <%= cl_image_tag(question.profile.photo_url, class: "ui avatar image") %>
       <div class="content">
         <div class="header question-title <%= question.tag.name %>"><%= question.title %></div>
       </div>

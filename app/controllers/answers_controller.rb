@@ -7,8 +7,13 @@ class AnswersController < ApplicationController
       vote: 0,
       profile: current_user.profile,
       question: question,
-      media: answer_params[:media]
+      answered: false
     )
+    if answer_params[:media]
+      file = answer_params[:media].path
+      cloudinary_file = Cloudinary::Uploader.upload(file)
+      @answer[:media] = cloudinary_file['public_id']
+    end
     @answer.save
     redirect_to question
   end
