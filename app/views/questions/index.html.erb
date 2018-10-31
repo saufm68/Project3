@@ -1,16 +1,31 @@
 <div class="ui grid">
-	<div class="two column row">
-		<div class="column">
-			<div class="ui category search">
-			    <input id="search" class="prompt" type="text" placeholder="Search for a keyword">
-			</div>
-		</div>
-		<div class="column">
-			<div class="ui right aligned container">
+	<div class="row">
+		<div class="four wide column">
+			<div class="ui left aligned">
 			  <a class="ui labeled icon positive button" href="<%= new_question_path %>">
 			    <i class="edit icon"></i>
 			    Post
 			  </a>
+			</div>
+		</div>
+		<div class="twelve wide column">
+			<div class="ui right aligned container">
+				<span id="filter" class="ui selection dropdown">
+				  <input type="hidden" name="Category">
+				  <i class="dropdown icon"></i>
+				  <span class="default text">Category</span>
+				  <span class="menu">
+				  	<span class="item" data-value="all">All</span>
+				    <span class="item" data-value="vocabulary">Vocabulary</span>
+				    <span class="item" data-value="grammar">Grammar</span>
+				    <span class="item" data-value="pronunciation">Pronunciation</span>
+				    <span class="item" data-value="translate">Translate</span>
+				    <span class="item" data-value="others">Others</span>
+				  </span>
+				</span>
+			  <span class="ui input">
+			    <input id="search" type="text" placeholder="Search for a keyword">
+				</span>
 			</div>
 		</div>
 	</div>
@@ -21,7 +36,7 @@
     <a href="<%= question_path(question) %>" class="item question">
       <img class="ui avatar image" src="<%= question.profile.photo_url %>">
       <div class="content">
-        <div class="header question-title"><%= question.title %></div>
+        <div class="header question-title <%= question.tag.name %>"><%= question.title %></div>
       </div>
     </a>
   <% end %>
@@ -29,13 +44,35 @@
 
 <script>
 	const search = document.getElementById('search');
+	const allQuestions = document.getElementsByClassName('question-title');
+	const filter = document.getElementById('filter')
+
 	search.addEventListener('input', () => {
-		const allQuestions = document.getElementsByClassName('question-title')
 		Array.prototype.forEach.call(allQuestions, (e) => {
 			e.parentNode.parentNode.style.display = 'block';
 			if (e.innerHTML.includes(search.value) === false) {
 				e.parentNode.parentNode.style.display = 'none';
 			}
 		});
+	});
+
+	function filterElement(value) {
+
+		if (value === 'all') {
+			Array.prototype.forEach.call(allQuestions, (e) => {
+				e.parentNode.parentNode.style.display = 'block';
+			});
+		} else {
+			Array.prototype.forEach.call(allQuestions, (e) => {
+				e.parentNode.parentNode.style.display = 'block';
+				if (e.classList.contains(value) === false) {
+					e.parentNode.parentNode.style.display = 'none';
+				}
+			});
+		}
+	};
+
+	filter.addEventListener('change', () => {
+		filterElement(filter.childNodes[1].value)
 	});
 </script>
