@@ -23,4 +23,7 @@ window.onload = function() {
       .attr('src', img);
     $('.ui.modal').modal('show');
   });
+
+  //Activate Dropdown
+  $('.ui.dropdown').dropdown();
 };
