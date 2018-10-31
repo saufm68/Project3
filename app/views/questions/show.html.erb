@@ -14,6 +14,14 @@
   </div>
 <% end %>
 
+<div class="ui basic modal">
+  <div class="ui fluid image">
+    <div class="image content">
+      <img src="">
+    </div>
+  </div>
+</div>
+
 <div class="ui grid">
   <div class="row author">
 
@@ -46,13 +54,6 @@
               <div class="ui small image media">
                 <%= image_tag @question.media.url %>
               </div>
-              <div class="ui basic modal">
-                <div class="ui fluid image">
-                  <div class="image content">
-                    <%= image_tag @question.media.url %>
-                  </div>
-                </div>
-              </div>
             <% end %>
           </div>
         </div>
@@ -78,9 +79,11 @@
                   <%= image_tag @correctAnswer.media.url %>
                 </div>
               <% end %>
+              <div>
                 <%= link_to answer_path(@correctAnswer, purpose: 'upvote'), class: "circular ui icon mini red button floated right", data: {tooltip: "Upvote: #{@correctAnswer.vote}", position: 'top center' }, method: :put do %>
                   <i class="arrow up icon"></i>
                 <% end %>
+              </div>
             </div>
           </div>
         </div>
@@ -122,6 +125,7 @@
                     <%= image_tag answer.media.url %>
                   </div>
                 <% end %>
+                <div>
                 <% if !@correctAnswer && current_user.profile == @question.profile %>
                   <%= link_to answer_path(answer), class: "circular ui icon mini green button floated right", method: :put do %>
                     <i class="check icon"></i>
@@ -130,6 +134,7 @@
                 <%= link_to answer_path(answer, purpose: 'upvote'), class: "circular ui icon mini red button floated right", data: {tooltip: "Upvote: #{answer.vote}", position: 'top center' }, method: :put do %>
                   <i class="arrow up icon"></i>
                 <% end %>
+                </div>
               </div>
             </div>
           </div>
