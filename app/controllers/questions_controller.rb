@@ -29,7 +29,7 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @answer = Answer.new
     @correctAnswer = Answer.find_by(question_id: @question.id, answered: true)
-    @answers = Answer.where(question_id: @question.id, answered: false)
+    @answers = Answer.where(question_id: @question.id).order('answered DESC ,vote DESC, updated_at DESC')
   end
 
   def edit
