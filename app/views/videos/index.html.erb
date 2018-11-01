@@ -1,61 +1,21 @@
-<h1><%= @playlist.name %></h1>
+<h1>Explore Videos</h1>
 
 
-<% @video.each do |video|%>
-	<div>
-		<%= link_to video.video_url, playlist_video_path(@playlist.id, video.id) %>
+<div class="ui grid"></div>
 
-			<%# Converting youtube link to preview images %>
-			<% string = video.video_url %>
-			<% string.gsub!('www','img')%>
-			<% string = string.gsub!('embed','vi') << '/0.jpg'%>
+<% @videos.each do |video| %>
 
-			<img src=<%= string%>>
+<%= video.video_url %>
+	<% string = video.video_url.dup %>
+	<% string.gsub!('www','img')%>
+	<%#= string = string.gsub!('embed','vi') << '/0.jpg'%>
 
-		<%= link_to 'Delete Video', playlist_video_path(@playlist.id, video.id),
-			method: :delete,
-			data: { confirm: 'Are you sure?' }  %>
+	<div class="column">
+		<div class="playlist-video-box">
+		<%#= link_to image_tag(string, class: "preview-image"), video_path(video.id) %>
 
-	</div>
-<%end%>
 
-<button id="display-create-form-video">Add Video</button>
 
-<div id="add-video-form" style="display:none;">
-<%= form_with scope: :video, url: playlist_videos_path(@playlist.id), local: true do |form| %>
-
-  <p>
-    <%= form.label :video_url %><br>
-    <%= form.text_area :video_url %>
-  </p>
-
-	<p>
-	<%= form.hidden_field :playlist_id, :value => @playlist.id %>
-	</p>
-
-  <p>
-    <%= form.submit %>
-  </p>
 <% end %>
 
 </div>
-
-<%= link_to 'Back to Playlist', playlists_path %>
-
-<script>
-	displayform = document.getElementById('display-create-form-video')
-	addVideoForm = document.getElementById('add-video-form')
-
-	displayform.addEventListener('click', function(event){
-
-		if(addVideoForm.style.display !== "none"){
-		addVideoForm.style.display ="none"
-		}
-		else
-		addVideoForm.style.display ="block"
-
-	})
-
-
-
-</script>
