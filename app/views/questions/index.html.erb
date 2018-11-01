@@ -2,10 +2,12 @@
   <div class="row">
     <div class="four wide column">
       <div class="ui left aligned">
-        <a class="ui labeled icon positive button" href="<%= new_question_path %>">
-          <i class="edit icon"></i>
-          Post
-        </a>
+        <% if current_user %>
+          <a class="ui labeled icon positive button" href="<%= new_question_path %>">
+            <i class="edit icon"></i>
+            Post
+          </a>
+        <% end %>
       </div>
     </div>
     <div class="twelve wide column">
