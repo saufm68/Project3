@@ -3,8 +3,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
-# Use CarrierWave for uploading file
-gem 'carrierwave', '~> 1.0'
 # Use cloudinary for image, video and audio upload
 gem 'cloudinary'
 # Use jQuery for Semantic UI and DOM manipulation
@@ -70,3 +68,4 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
+

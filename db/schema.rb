@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2018_11_01_070942) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "answered"
+    t.string "media"
     t.index ["profile_id"], name: "index_answers_on_profile_id"
     t.index ["question_id"], name: "index_answers_on_question_id"
   end

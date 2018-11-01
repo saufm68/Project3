@@ -11,6 +11,11 @@ class QuestionsController < ApplicationController
   def create
     params = question_params
     params[:tag] = Tag.find_by(name: params[:tag])
+    if params[:media]
+      file = params[:media].path
+      cloudinary_file = Cloudinary::Uploader.upload(file)
+      params[:media] = cloudinary_file['public_id']
+    end
     @question = Question.new(params)
     @question.profile = current_user.profile
     @question.save
@@ -18,11 +23,13 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    if user_signed_in?
+      @bookmark = Bookmark.find_by(profile_id: current_user.id, question_id: params[:id])
+    end
     @question = Question.find(params[:id])
     @answer = Answer.new
     @correctAnswer = Answer.find_by(question_id: @question.id, answered: true)
-    @answers = Answer.where(question_id: @question.id, answered: nil)
-    puts @answers
+    @answers = Answer.where(question_id: @question.id).order('answered DESC ,vote DESC, updated_at')
   end
 
   def edit
@@ -32,6 +39,9 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
+    @question = Question.find(params[:id])
+    @question.destroy
+    redirect_to questions_path
   end
 
   private

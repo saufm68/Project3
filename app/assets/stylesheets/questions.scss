@@ -4,23 +4,77 @@
 
 .reply {
   position: fixed;
-  width: 50%;
-  bottom: 2em;
+  width: 100%;
+  height: 6em;
+  bottom: 0;
+  background: white;
+
+  .ui.action.input {
+    position: relative;
+    top: 50%;
+    left: 0;
+    width: 50%;
+    transform: translate(0, -50%);
+
+    .upload {
+      position: absolute;
+      right: 18%;
+      top: 50%;
+      transform: translate(0, -50%);
+      z-index: 999;
+
+      input {
+        display: none;
+        padding-right: 50px;
+      }
+    }
+  }
+
+  .ui.image.label {
+    position: absolute;
+    top: 0;
+    display: none;
+  }
 }
 
-.ui.grid > .replies {
-  justify-content: flex-end;
+.ui.grid {
+  margin-top: 0.5em;
+
+  .answers {
+    justify-content: flex-end;
+
+    .description {
+      text-align: right;
+    }
+  }
+
+  .ui.segment.items.qna {
+    max-width: 70%;
+    margin: 0;
+
+    .content {
+      .description {
+        clear: both;
+        width: 100%;
+      }
+
+      .right {
+        float: right;
+      }
+
+      .ui.small.image.media {
+        margin-bottom: 0.5em;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
 }
 
-.ui.segment.items.qna {
-  max-width: 70%;
-  margin: 0;
-}
-
-.qna .item .content .right {
-  float: right;
-}
-
-.ui.items > .item > .content p {
-  clear: both;
+.question-category {
+	float: right;
+	color: grey;
+	margin-top: 0.5em;
 }
