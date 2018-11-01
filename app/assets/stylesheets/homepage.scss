@@ -19,6 +19,27 @@
   }
 }
 
+.field_with_errors {
+  width: 100%;
+  margin-bottom: 1em;
+
+  input {
+    padding-left: 2.67142857em !important;
+    outline: none;
+    width: 100%;
+    margin: 0;
+    flex: 1 0 auto;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    line-height: 1.21428571em;
+    font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    padding: 0.67857143em 1em;
+    background: #ffffff;
+    border: 1px solid rgba(34, 36, 38, 0.15);
+    color: rgba(0, 0, 0, 0.87);
+  }
+}
+
+.notice,
 .alert {
   text-align: center;
   color: red;
