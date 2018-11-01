@@ -12,3 +12,15 @@ tags = Tag.create([
   { name: 'translate' },
   { name: 'pronunciation' }
 ])
+
+playlists = Playlist.create([
+  { name: 'Getting Started'},
+  { name: 'Intermediate'},
+  { name: 'Advanced'},
+])
+
+videos = Video.create([
+  { video_url: "https://www.youtube.com/embed/wpC9bz8Comw", playlist_id: 1},
+  { video_url: "https://www.youtube.com/embed/X7q1J04xeS8", playlist_id: 2},
+  { video_url: "https://www.youtube.com/embed/M2_L8YVCO1Y", playlist_id: 3},
+])
