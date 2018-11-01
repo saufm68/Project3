@@ -1,5 +1,11 @@
 <% if user_signed_in? %>
   <div class="ui right aligned container">
+    <% if current_user.profile == @question.profile %>
+      <%= link_to question_path(@question), class: "ui labeled icon red button", method: :delete do %>
+        <i class="delete icon"></i>
+        Delete
+      <% end %>
+    <% end %>
     <% if @bookmark %>
       <%= link_to bookmark_path(@bookmark, question_id: @question.id), class: "ui labeled icon grey button", method: :delete do %>
         <i class='bookmark icon'></i>
@@ -90,7 +96,7 @@
                 <% end %>
                 <% if current_user %>
                   <div>
-                    <%= link_to answer_path(answer, purpose: 'upvote'), class: "circular ui icon mini red button floated right", data: {tooltip: "Upvote: #{answer.vote}", position: 'top center' }, method: :put do %>
+                    <%= link_to answer_path(answer, purpose: 'upvote'), class: "circular ui icon mini olive button floated right", data: {tooltip: "Upvote: #{answer.vote}", position: 'top center' }, method: :put do %>
                       <i class="arrow up icon"></i>
                     <% end %>
                   </div>
@@ -140,7 +146,7 @@
                 <% end %>
                 <% if current_user %>
                   <div>
-                    <%= link_to answer_path(answer, purpose: 'upvote'), class: "circular ui icon mini red button floated left", data: {tooltip: "Upvote: #{answer.vote}", position: 'top center' }, method: :put do %>
+                    <%= link_to answer_path(answer, purpose: 'upvote'), class: "circular ui icon mini olive button floated left", data: {tooltip: "Upvote: #{answer.vote}", position: 'top center' }, method: :put do %>
                       <i class="arrow up icon"></i>
                     <% end %>
                   </div>
