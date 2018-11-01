@@ -29,7 +29,7 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @answer = Answer.new
     @correctAnswer = Answer.find_by(question_id: @question.id, answered: true)
-    @answers = Answer.where(question_id: @question.id).order('answered DESC ,vote DESC, updated_at DESC')
+    @answers = Answer.where(question_id: @question.id).order('answered DESC ,vote DESC, updated_at')
   end
 
   def edit
@@ -39,6 +39,9 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
+    @question = Question.find(params[:id])
+    @question.destroy
+    redirect_to questions_path
   end
 
   private
