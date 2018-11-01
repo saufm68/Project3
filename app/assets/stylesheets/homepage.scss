@@ -3,11 +3,25 @@
   z-index: 0;
   background: url('malay.jpg') no-repeat;
   background-size: cover;
-  background-position: bottom;
+  background-position: top;
   width: 100vw;
   height: 60vh;
   left: 0;
   top: 2em;
+}
+
+.login.column {
+  max-width: 450px;
+
+  .ui.left.icon.input {
+    width: 100%;
+    margin-bottom: 1em;
+  }
+}
+
+.alert {
+  text-align: center;
+  color: red;
 }
 
 .ui.grid.home {
