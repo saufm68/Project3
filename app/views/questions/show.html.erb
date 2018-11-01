@@ -69,9 +69,9 @@
         <div class="ui segment items qna">
           <div class="item">
             <div class="content">
-            	<% if answer.answered %>
-            		<span class="ui red ribbon label"><i class="chess queen icon"></i></span>
-            	<% end %>
+              <% if answer.answered %>
+                <span class="ui red ribbon label"><i class="chess queen icon"></i></span>
+              <% end %>
               <span class="meta right">
                 <%= answer.created_at.strftime("%F %T") %>
               </span>
@@ -83,16 +83,18 @@
                   </div>
                 <% end %>
                 <div>
-                <% if !@correctAnswer && current_user.profile == @question.profile %>
+                <% if current_user && !@correctAnswer && current_user.profile == @question.profile %>
                   <%= link_to answer_path(answer), class: "circular ui icon mini green button floated right", data: {tooltip: "Accept", position: 'top center' }, method: :put do %>
                     <i class="check icon"></i>
                   <% end %>
                 <% end %>
-                <div>
-                  <%= link_to answer_path(answer, purpose: 'upvote'), class: "circular ui icon mini red button floated right", data: {tooltip: "Upvote: #{answer.vote}", position: 'top center' }, method: :put do %>
-                    <i class="arrow up icon"></i>
-                  <% end %>
-                </div>
+                <% if current_user %>
+                  <div>
+                    <%= link_to answer_path(answer, purpose: 'upvote'), class: "circular ui icon mini red button floated right", data: {tooltip: "Upvote: #{answer.vote}", position: 'top center' }, method: :put do %>
+                      <i class="arrow up icon"></i>
+                    <% end %>
+                  </div>
+                <% end %>
                 </div>
               </div>
             </div>
@@ -136,11 +138,13 @@
                     <%= cl_image_tag(answer.media) %>
                   </div>
                 <% end %>
-                <div>
-                  <%= link_to answer_path(answer, purpose: 'upvote'), class: "circular ui icon mini red button floated left", data: {tooltip: "Upvote: #{answer.vote}", position: 'top center' }, method: :put do %>
-                    <i class="arrow up icon"></i>
-                  <% end %>
-                </div>
+                <% if current_user %>
+                  <div>
+                    <%= link_to answer_path(answer, purpose: 'upvote'), class: "circular ui icon mini red button floated left", data: {tooltip: "Upvote: #{answer.vote}", position: 'top center' }, method: :put do %>
+                      <i class="arrow up icon"></i>
+                    <% end %>
+                  </div>
+                <% end %>
               </div>
             </div>
           </div>
@@ -151,24 +155,26 @@
   <% end %>
 </div>
 
-<%= form_with model: @answer, local: true, class: "reply" do |form| %>
-  <%= form.hidden_field :question_id, value: @question.id %>
-  <div class="ui fluid action input">
-    <%= form.text_field :description, required: true, placeholder: "Type your answer here." %>
-    <div class="upload">
-      <%= form.label :media do %>
-        <i class="circular upload link icon"></i>
-      <% end %>
-      <%= form.file_field :media, class: "file", accept: 'image/png,image/gif,image/jpeg, image/jpg' %>
+<% if current_user %>
+  <%= form_with model: @answer, local: true, class: "reply" do |form| %>
+    <%= form.hidden_field :question_id, value: @question.id %>
+    <div class="ui fluid action input">
+      <%= form.text_field :description, required: true, placeholder: "Type your answer here." %>
+      <div class="upload">
+        <%= form.label :media do %>
+          <i class="circular upload link icon"></i>
+        <% end %>
+        <%= form.file_field :media, class: "file", accept: 'image/png,image/gif,image/jpeg, image/jpg' %>
+      </div>
+      <button class="ui teal right labeled icon button">
+        <i class="arrow right icon"></i>
+        Reply
+      </button>
     </div>
-    <button class="ui teal right labeled icon button">
-      <i class="arrow right icon"></i>
-      Reply
-    </button>
-  </div>
-  <div class="ui image label">
-    <i class="image icon"></i>
-    <span class="media"></span>
-    <i class="delete icon"></i>
-  </div>
+    <div class="ui image label">
+      <i class="image icon"></i>
+      <span class="media"></span>
+      <i class="delete icon"></i>
+    </div>
+  <% end %>
 <% end %>
