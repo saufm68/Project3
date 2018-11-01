@@ -1,3 +1,4 @@
 class Video < ActiveRecord::Base
-  belongs_to :playlist
+  has_and_belongs_to_many :playlists
+  belongs_to :profile
 end

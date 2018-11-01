@@ -24,6 +24,11 @@ Rails.application.routes.draw do
     resources :videos
   end
 
+  resources :videos do
+    resources :playlists
+  end
+
+
   get '/settings', to: 'profiles#edit', as: 'edit_profile'
 
   root 'profiles#index'

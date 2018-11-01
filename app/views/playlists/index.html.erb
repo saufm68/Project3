@@ -4,7 +4,14 @@
 
 <!-- </h1> -->
 
-<h1>Your Playlist
+<h1>Explore</h1>
+
+<%=link_to 'explore',playlist_videos_path(@playlist)%>
+
+
+
+
+<h1>Curated for You
 
 <!-- <div class="ui icon button" id="create-button" data-content="Add Playlist">
 	<i class="big icon add"></i>
@@ -24,7 +31,7 @@
 <% @playlist.each do |playlist|%>
 	<div class="title item">
 		<i class="dropdown-button teal dropdown middle aligned icon"></i>
-		<a class="header"><%= link_to playlist.name, playlist_videos_path(playlist) %></a>
+		<a class="header"><%= playlist.name %></a>
 
 		<%# Icons to delete playlists %>
 		<%= link_to playlist_path(playlist),
@@ -44,14 +51,18 @@
 			<div class="ui stackable four column grid container">
 	    <% playlist.videos.each do |video| %>
 
-			<% string = video.video_url %>
+			<% string = video.video_url.dup %>
 			<% string.gsub!('www','img')%>
 			<% string = string.gsub!('embed','vi') << '/0.jpg'%>
 
 			<div class="column">
 				<div class="playlist-video-box">
-				<img src=<%= string%> class="preview-image">
-				</div>
+				<%= link_to image_tag(string, class: "preview-image"),  playlist_video_path(playlist.id, video.id) %>
+
+
+<!-- 				<img src=<%= string%> class="preview-image">
+ -->				</div>
+				</a>
 			</div>
 
 
@@ -67,6 +78,71 @@
 
 
 
+
+
+<h1>Your Playlist
+
+<!-- <div class="ui icon button" id="create-button" data-content="Add Playlist">
+	<i class="big icon add"></i>
+
+</div> -->
+
+
+<i class="small icon fitted add square" id="create-button" data-content="Add Playlist"></i>
+
+<i class="small icon fitted minus square outline" id="remove-button" data-content="Delete Playlist"></i>
+
+</h1>
+
+<div class="ui styled fluid accordion">
+
+<% @playlist.each do |playlist|%>
+	<div class="title item">
+		<i class="dropdown-button teal dropdown middle aligned icon"></i>
+		<a class="header"><%= playlist.name %></a>
+
+		<%# Icons to delete playlists %>
+		<%= link_to playlist_path(playlist),
+			class: "right floated",
+			method: :delete,
+			data: { confirm: 'Are you sure?' } do %>
+			<i class="teal delete icon link delete-playlist-button" style="display: none"></i>
+			<% end %>
+	</div>
+
+
+	<div class="content">
+
+		<%# display dropdown of each video %>
+		<div class="transition hidden">
+
+			<div class="ui stackable four column grid container">
+	    <% playlist.videos.each do |video| %>
+
+			<% string = video.video_url.dup %>
+			<% string.gsub!('www','img')%>
+			<% string = string.gsub!('embed','vi') << '/0.jpg'%>
+
+			<div class="column">
+				<div class="playlist-video-box">
+				<%= link_to image_tag(string, class: "preview-image"),  playlist_video_path(playlist.id, video.id) %>
+
+
+<!-- 				<img src=<%= string%> class="preview-image">
+ -->				</div>
+				</a>
+			</div>
+
+
+	    <% end %>
+	    </div>
+  	</div>
+
+	</div>
+
+<%end%>
+
+</div>
 
 
 
@@ -120,7 +196,8 @@
 </div>
 
 
-
+<%
+=begin%>
 
 <h2 class = "ui left-aligned icon header">
 	<i class="circular users icon"></i>
@@ -167,31 +244,25 @@
 <%#= link_to 'Add Playlist', new_playlist_path %>
 </div>
 
+<%
+=end %>
 
-<div>
+
+<!-- <div>
 
 	<h2>Getting Started</h2>
 
 	<iframe width="560" height="315" src="https://www.youtube.com/embed/FPf96GuWnfc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-</div>
+</div> -->
 
-
-
-
-
-
-
-
-
-
-<div>
+<!-- <div>
 	<h2>Intermediate</h2>
 </div>
 
 <div>
 	<h2>Advanced</h2>
-</div>
+</div> -->
 
 <script>
 
@@ -287,7 +358,13 @@ $('#remove-button')
   .popup()
 ;
 
+$('#create-button-user')
+  .popup()
+;
 
+$('#remove-button-user')
+  .popup()
+;
 
 
 </script>

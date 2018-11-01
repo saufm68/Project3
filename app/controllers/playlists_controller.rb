@@ -3,6 +3,7 @@ class PlaylistsController < ApplicationController
   def index
     @playlist = Playlist.all
     # @newPlaylist = Playlist.new
+    @allvideos = Video.all
   end
 
 
