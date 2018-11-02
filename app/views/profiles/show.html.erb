@@ -68,6 +68,7 @@
 <div class="ui top attached tabular menu">
   <a class="active item" data-tab="threads">Threads</a>
   <a class="item" data-tab="bookmarks">Bookmarks</a>
+  <a class="item" data-tab="playlists">Playlists</a>
 </div>
 <div class="ui bottom attached active tab segment" data-tab="threads">
   <div class='content-container'>
@@ -94,6 +95,22 @@
             <%= cl_image_tag(@profile.photo_url, class: "ui avatar image") %>
             <div class="content">
               <div class="header"><%= question.title %></div>
+            </div>
+          </a>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="ui bottom attached tab segment" data-tab="playlists">
+  <div class='content-container'>
+    <div class="ui large middle aligned divided animated list">
+      <% if @profile.playlists.length > 0 %>
+        <% @profile.playlists.each do |playlist|%>
+          <a href="<%= playlist_path(playlist) %>" class="item question">
+            <%= cl_image_tag(@profile.photo_url, class: "ui avatar image") %>
+            <div class="content">
+              <div class="header"><%= playlist.name %></div>
             </div>
           </a>
         <% end %>
