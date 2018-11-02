@@ -19,12 +19,15 @@
 </div> -->
 
 
-
+<% if user_signed_in? && current_user.id == 1%>
 <i class="small icon fitted add square" id="create-button" data-content="Add Playlist"></i>
 
 <i class="small icon fitted minus square outline" id="remove-button" data-content="Delete Playlist"></i>
 
+
+<%end%>
 </h1>
+
 
 <div class="ui styled fluid accordion">
 
@@ -79,7 +82,7 @@
 
 
 
-
+<% if user_signed_in? %>
 <h1>Your Playlist
 
 <!-- <div class="ui icon button" id="create-button" data-content="Add Playlist">
@@ -96,7 +99,7 @@
 
 <div class="ui styled fluid accordion">
 
-<% @playlist.each do |playlist|%>
+<% @yourPlaylists.each do |playlist|%>
 	<div class="title item">
 		<i class="dropdown-button teal dropdown middle aligned icon"></i>
 		<a class="header"><%= playlist.name %></a>
@@ -144,6 +147,10 @@
 
 </div>
 
+<%else %>
+<p>Log in to create your own playlist</p>
+
+<% end %>
 
 
 
