@@ -2,9 +2,16 @@
   margin-right: 1em;
 }
 
-.main.container {
+.main-container {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
   padding-top: 7em;
   padding-bottom: 6em;
   position: relative;
   min-height: 100vh;
+
+  @include respond(tab-port) {
+    width: 100%;
+  }
 }

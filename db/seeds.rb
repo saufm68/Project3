@@ -24,7 +24,3 @@ playlists = Playlist.create([
   { name: 'Intermediate', video_ids: [videos[1].id], profile_id: 1},
   { name: 'Advanced', video_ids: [videos[2].id], profile_id: 1}
 ])
-
-
-
-
