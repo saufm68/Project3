@@ -28,6 +28,9 @@ Rails.application.routes.draw do
     resources :playlists
   end
 
+  #remove video from playlist
+  delete '/remove/:playlist_id/videos/:video_id' , to: 'playlists#remove_video_from_playlist' , as: "remove_video_from_playlist"
+  post '/add/videos/:video_id', to: 'playlists#add_video_to_playlist' , as: 'add_video_to_playlist'
 
   get '/settings', to: 'profiles#edit', as: 'edit_profile'
 

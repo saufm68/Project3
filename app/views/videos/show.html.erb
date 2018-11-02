@@ -1,4 +1,25 @@
-<h1>works</h1>
-
 
 	<iframe width="560" height="315"  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen src=<%= @video.video_url%>></iframe>
+
+	<%#= link_to 'Add video to playlist',  videos_path %>
+
+<div class="ui hover button">
+
+<%= form_with scope: :playlists, url: add_video_to_playlist_path(@video), local: true do |form| %>
+
+<%#= form.hidden_field :video_id, value: @video.id %>
+
+<%= form.collection_check_boxes :playlist_ids,current_user.profile.playlists, :id, :name, class: "#{'display:none'}" %>
+
+<%= form.submit 'SAVE', class: "ui positive button"  %>
+
+<% end %>
+</div>
+
+
+
+<script>
+
+
+
+</script>
