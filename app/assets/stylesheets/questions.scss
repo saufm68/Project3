@@ -4,28 +4,33 @@
 
 .reply {
   position: fixed;
-  width: 100%;
+  width: 100vw;
   height: 6em;
   bottom: 0;
+  left: 0;
   background: white;
 
   .ui.action.input {
-    position: relative;
+    position: absolute;
     top: 50%;
-    left: 0;
+    left: 50%;
     width: 50%;
-    transform: translate(0, -50%);
+    transform: translate(-50%, -50%);
+
+    @include respond(tab-port) {
+      left: 0;
+      width: 100%;
+    }
 
     .upload {
       position: absolute;
-      right: 18%;
+      right: 19%;
       top: 50%;
       transform: translate(0, -50%);
       z-index: 999;
 
       input {
         display: none;
-        padding-right: 50px;
       }
     }
   }
@@ -74,7 +79,7 @@
 }
 
 .question-category {
-	float: right;
-	color: grey;
-	margin-top: 0.5em;
+  float: right;
+  color: grey;
+  margin-top: 0.5em;
 }
