@@ -1,9 +1,11 @@
 class PlaylistsController < ApplicationController
 
   def index
-    @playlist = Playlist.all
+    @playlist = Playlist.where(profile_id:1)
+
+
+    @yourPlaylists = current_user.profile.playlists if current_user
     # @newPlaylist = Playlist.new
-    @allvideos = Video.all
   end
 
 
@@ -14,6 +16,7 @@ class PlaylistsController < ApplicationController
 
   def create
     @playlist = Playlist.new(playlist_params)
+    @playlist.profile_id = current_user.id
     @playlist.save
     # redirect_to '/playlists'
     redirect_to playlists_path

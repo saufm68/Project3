@@ -13,14 +13,18 @@ tags = Tag.create([
   { name: 'pronunciation' }
 ])
 
-playlists = Playlist.create([
-  { name: 'Getting Started'},
-  { name: 'Intermediate'},
-  { name: 'Advanced'},
+videos = Video.create([
+  { name: "Beginner 1" , video_url: "https://www.youtube.com/embed/wpC9bz8Comw", profile_id: 1},
+  { name: "Intermediate 1", video_url: "https://www.youtube.com/embed/X7q1J04xeS8", profile_id: 1},
+  { name: "Advanced 1", video_url: "https://www.youtube.com/embed/M2_L8YVCO1Y", profile_id: 1}
 ])
 
-videos = Video.create([
-  { video_url: "https://www.youtube.com/embed/wpC9bz8Comw", playlist_id: 1},
-  { video_url: "https://www.youtube.com/embed/X7q1J04xeS8", playlist_id: 2},
-  { video_url: "https://www.youtube.com/embed/M2_L8YVCO1Y", playlist_id: 3},
+playlists = Playlist.create([
+  { name: 'Getting Started', video_ids: [videos[0].id], profile_id: 1},
+  { name: 'Intermediate', video_ids: [videos[1].id], profile_id: 1},
+  { name: 'Advanced', video_ids: [videos[2].id], profile_id: 1}
 ])
+
+
+
+
