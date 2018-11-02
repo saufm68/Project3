@@ -13,22 +13,24 @@ class VideosController < ApplicationController
   end
 
   def create
-    @video = Video.new(video_params)
+    @video = Video.new
+    @video.video_url = video_params[:video_url]
     @video.profile_id = current_user.id
-    @video.save
+
+
+    # @video.save
     # render plain: video_params.inspect
 
-    # @playlist = Playlist.find(params[:playlist_id])
-
+    @playlist = Playlist.find(video_params[:playlist_id])
+    @playlist.videos << @video
     # redirect_to playlist_videos_path
 
-    redirect_to videos_path
+    redirect_to @playlist
 
   end
 
   def show
-    @videos = Video.all
-    @video = @videos.find_by(id:params[:id])
+    @video = Video.find(params[:id])
     # puts "show stuff #{@video.id}"
   end
 

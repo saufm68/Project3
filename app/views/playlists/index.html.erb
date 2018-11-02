@@ -82,6 +82,8 @@
 
 
 
+<%# Your personnal playlist %>
+
 <% if user_signed_in? %>
 <h1>Your Playlist
 
@@ -102,7 +104,7 @@
 <% @yourPlaylists.each do |playlist|%>
 	<div class="title item">
 		<i class="dropdown-button teal dropdown middle aligned icon"></i>
-		<a class="header"><%= playlist.name %></a>
+		<a class="header"><%= link_to playlist.name, playlist_path(playlist) %></a>
 
 		<%# Icons to delete playlists %>
 		<%= link_to playlist_path(playlist),
