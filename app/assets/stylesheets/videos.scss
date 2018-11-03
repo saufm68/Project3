@@ -1,0 +1,14 @@
+.video-index-container {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.ui.special.cards > .card.video-index-list {
+	width: 230px;
+	height: 270px;
+}
+
+.iframe-video {
+	min-height: 450px;
+}

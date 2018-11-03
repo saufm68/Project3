@@ -1,28 +1,51 @@
-<h1><%= @yourPlaylist.name %>
-	<% if user_signed_in? && current_user.id == @yourPlaylist.profile.id %>
-		<i class="small icon fitted add square" id="create-button" data-content="Add Video"></i>
-		<i class="small icon fitted minus square outline" id="remove-button" data-content="Delete Video"></i>
-	<%end%>
-
-	<%= link_to 'All playlist', playlists_path %>
-</h1>
-
-<% @yourPlaylist.videos.each do |video| %>
-	<% string = video.video_url.dup %>
-	<% string.gsub!('www','img')%>
-	<% string = string.gsub!('embed','vi') %>
-	<% if string %>
-		<% string << '/0.jpg' %>
-		<%= link_to image_tag(string, class: "preview-image"), video_path(video) %>
-
-		<%# Icons to delete playlists %>
-		<%= link_to remove_video_from_playlist_path(@yourPlaylist, video),
-			method: :delete,
-			data: { confirm: 'Do you want to remove this video from playlist' } do %>
-			<div class="negative ui button link delete-playlist-button" style="display: none">Remove Video</div>
+<div class="ui grid">
+	<div class="two column row">
+		<div class="column">
+			<h1><%= @yourPlaylist.name %>
+				<% if user_signed_in? && current_user.id == @yourPlaylist.profile.id %>
+					<i class="small icon fitted add square" id="create-button" data-content="Add Video"></i>
+					<i class="small icon fitted minus square outline" id="remove-button" data-content="Delete Video"></i>
+				<%end%>
+			</h1>
+		</div>
+		<div class="column">
+			<div class="ui right aligned container">
+				<%= link_to playlists_path do %>
+					<button class="ui inverted orange button">Back to playlist</button>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+<br>
+<div class="show-playlist-container">
+	<% @yourPlaylist.videos.each do |video| %>
+		<% string = video.video_url.dup %>
+		<% string.gsub!('www','img')%>
+		<% string = string.gsub!('embed','vi') %>
+		<% if string %>
+			<% string << '/0.jpg' %>
+			<span class="show-playlist-list">
+				<div class="ui card">
+					<%= link_to image_tag(string), video_path(video), class: "image" %>
+				  <div class="content">
+				    <p class="header"><%= video.name %></p>
+				    <div class="meta">
+				      <p><%= video.created_at %></p>
+				    </div>
+				  </div>
+				</div>
+				<br>
+		  	<%= link_to remove_video_from_playlist_path(@yourPlaylist, video),
+					method: :delete,
+					data: { confirm: 'Do you want to remove this video from playlist' } do %>
+					<div class="negative ui button link delete-playlist-button" style="display: none">Remove Video</div>
+				<% end %>
+			</span>
 		<% end %>
 	<% end %>
-<% end %>
+</div>
+
 
 <%# modal create form %>
 <div class="ui basic modal">
@@ -65,37 +88,39 @@
 	</div>
 </div>
 
-<script>
-//delete button
-	minusbutton = document.getElementById('remove-button');
-	deleteform = document.querySelectorAll('.delete-playlist-button');
-	minusbutton.addEventListener('click', function(event){
-		deleteform.forEach(function(item){
-			if(item.style.display === "none"){
-				item.style.display= "inline"
-			}
-			else{
-				item.style.display = "none"
-			}
+<% if user_signed_in? %>
+	<script>
+	//delete button
+		minusbutton = document.getElementById('remove-button');
+		deleteform = document.querySelectorAll('.delete-playlist-button');
+		minusbutton.addEventListener('click', function(event){
+			deleteform.forEach(function(item){
+				if(item.style.display === "none"){
+					item.style.display= "inline"
+				}
+				else{
+					item.style.display = "none"
+				}
+			});
 		});
-	});
 
-//Add button pop up
-	$('#create-button')
-  .popup()
-	;
+	//Add button pop up
+		$('#create-button')
+	  .popup()
+		;
 
-//Remove button pop up
-	$('#remove-button')
-  .popup()
-	;
-//Add video modal
-	createButton = document.getElementById('create-button');
-	createButton.addEventListener('click', function(event){
-				$('.ui.modal')
-				  .modal('show')
-				;
-	});
+	//Remove button pop up
+		$('#remove-button')
+	  .popup()
+		;
+	//Add video modal
+		createButton = document.getElementById('create-button');
+		createButton.addEventListener('click', function(event){
+					$('.ui.modal')
+					  .modal('show')
+					;
+		});
 
-</script>
+	</script>
+<% end %>
 

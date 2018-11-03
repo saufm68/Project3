@@ -2,3 +2,14 @@
 	max-width: 100%;
 	max-height: 100%;
 }
+
+.show-playlist-container {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.show-playlist-list{
+	width: 230px;
+	margin-bottom: 25px;
+}
