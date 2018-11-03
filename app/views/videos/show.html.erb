@@ -1,6 +1,8 @@
+<h1><%= @video.name %></h1>
+
 <iframe width="560" height="315"  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen src=<%= @video.video_url%>></iframe>
 
-<%#= link_to 'Add video to playlist',  videos_path %>
+<%= link_to 'Back',  '/playlists' %>
 
 <div class="ui hover button">
 
