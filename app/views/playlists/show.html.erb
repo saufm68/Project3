@@ -10,15 +10,17 @@
 <% @yourPlaylist.videos.each do |video| %>
 	<% string = video.video_url.dup %>
 	<% string.gsub!('www','img')%>
-	<% string = string.gsub!('embed','vi') << '/0.jpg'%>
+	<% string = string.gsub!('embed','vi') %>
+	<% if string %>
+		<% string << '/0.jpg' %>
+		<%= link_to image_tag(string, class: "preview-image"), video_path(video) %>
 
-	<%= link_to image_tag(string, class: "preview-image"), video_path(video) %>
-
-	<%# Icons to delete playlists %>
-	<%= link_to remove_video_from_playlist_path(@yourPlaylist, video),
-		method: :delete,
-		data: { confirm: 'Do you want to remove this video from playlist' } do %>
-		<div class="negative ui button link delete-playlist-button" style="display: none">Remove Video</div>
+		<%# Icons to delete playlists %>
+		<%= link_to remove_video_from_playlist_path(@yourPlaylist, video),
+			method: :delete,
+			data: { confirm: 'Do you want to remove this video from playlist' } do %>
+			<div class="negative ui button link delete-playlist-button" style="display: none">Remove Video</div>
+		<% end %>
 	<% end %>
 <% end %>
 
@@ -42,7 +44,7 @@
 			<div class="field">
 		    <%= form.label :video_url %>
 		    <div class="ui pointing below teal basic label">
-		      Enter your video url
+		      Enter your embeded video url
 		    </div>
 			    <%= form.text_field :video_url, placeholder: 'www.video.com/embed' %>
 			</div>
@@ -55,7 +57,7 @@
 		  <div class="actions">
 		    <div class="ui red basic cancel inverted button">
 		      <i class="remove icon"></i>
-		     Cancel
+		      Cancel
 		    </div>
 		      <%= form.submit 'Add Video' , class:"ui green ok inverted button" %>
 		  </div>

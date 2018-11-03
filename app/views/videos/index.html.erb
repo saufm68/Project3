@@ -7,45 +7,30 @@
 	<% @videos.each do |video| %>
 		<% string = video.video_url.dup %>
 		<% string.gsub!('www','img')%>
-		<% string = string.gsub!('embed','vi') << '/0.jpg'%>
-
-<!-- 		<div class="column">
-			<div class="playlist-video-box">
-		</div> -->
-
-	<div class="card">
-
-    <div class="blurring dimmable image">
-      <div class="ui dimmer">
-        <div class="content">
-          <div class="center">
-          	<%= link_to video_path(video.id)  do %>
-            <div class="ui inverted button">Watch</div>
-            <% end %>
-          </div>
-        </div>
-      </div>
-      			<%= link_to image_tag(string, class: "preview-image"), video_path(video.id) %>
-    </div>
-
-
-	<div class="content">
-      <a class="header"><%= video.name %></a>
-      <div class="meta">
-        <span class="date"><%= video.created_at%></span>
-      </div>
-    </div>
-
-  </div>
-
-
-
-
-
-
-
+		<% string = string.gsub!('embed','vi') %>
+		<% if string %>
+			<% string << '/0.jpg' %>
+			<div class="card">
+		    <div class="blurring dimmable image">
+		      <div class="ui dimmer">
+		        <div class="content">
+		          <div class="center">
+		          	<%= link_to video_path(video.id)  do %>
+		            <div class="ui inverted button">Watch</div>
+		            <% end %>
+		          </div>
+		        </div>
+		      </div>
+		      <%= link_to image_tag(string, class: "preview-image"), video_path(video.id) %>
+		    </div>
+				<div class="content">
+		      <a class="header"><%= video.name %></a>
+		      <div class="meta">
+		        <span class="date"><%= video.created_at%></span>
+		      </div>
+		    </div>
+		  </div>
+	  <% end %>
 	<% end %>
-
-	</div>
 
 </div>

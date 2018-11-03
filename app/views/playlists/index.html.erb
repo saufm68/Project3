@@ -22,12 +22,15 @@
 				    <% playlist.videos.each do |video| %>
 							<% string = video.video_url.dup %>
 							<% string.gsub!('www','img')%>
-							<% string = string.gsub!('embed','vi') << '/0.jpg'%>
-							<div class="column">
-								<div class="playlist-video-box">
-									<%= link_to image_tag(string, class: "preview-image"),  playlist_video_path(playlist.id, video.id) %>
+							<% string = string.gsub!('embed','vi') %>
+							<% if string %>
+							  <% string << '/0.jpg' %>
+								<div class="column">
+									<div class="playlist-video-box">
+										<%= link_to image_tag(string, class: "preview-image"),  playlist_video_path(playlist.id, video.id) %>
+									</div>
 								</div>
-							</div>
+							<% end %>
 				    <% end %>
 			    </div>
 		  	</div>
@@ -65,12 +68,15 @@
 			    <% playlist.videos.each do |video| %>
 						<% string = video.video_url.dup %>
 						<% string.gsub!('www','img')%>
-						<% string = string.gsub!('embed','vi') << '/0.jpg'%>
-						<div class="column">
-							<div class="playlist-video-box">
-								<%= link_to image_tag(string, class: "preview-image"),  playlist_video_path(playlist.id, video.id) %>
+						<% string = string.gsub!('embed','vi') %>
+						<% if string %>
+							<% string << '/0.jpg' %>
+							<div class="column">
+								<div class="playlist-video-box">
+									<%= link_to image_tag(string, class: "preview-image"),  playlist_video_path(playlist.id, video.id) %>
+								</div>
 							</div>
-						</div>
+						<% end %>
 			    <% end %>
 			    </div>
 		  	</div>
@@ -97,7 +103,7 @@
 					class: "right floated",
 					method: :delete,
 					data: { confirm: 'Are you sure?' } do %>
-					<i class="teal delete icon link delete-playlist-button mine" style="display: none"></i>
+					<i class="teal delete icon link delete-playlist-button" style="display: none"></i>
 				<% end %>
 			</div>
 
@@ -109,11 +115,14 @@
 						<% string = video.video_url.dup %>
 						<% string.gsub!('www','img')%>
 						<% string = string.gsub!('embed','vi') << '/0.jpg'%>
-						<div class="column">
-							<div class="playlist-video-box">
-								<%= link_to image_tag(string, class: "preview-image"),  playlist_video_path(playlist.id, video.id) %>
-							</div>
-						</div>
+							<% if string %>
+							  <% string << '/0.jpg' %>
+								<div class="column">
+									<div class="playlist-video-box">
+										<%= link_to image_tag(string, class: "preview-image"),  playlist_video_path(playlist.id, video.id) %>
+									</div>
+								</div>
+						<% end %>
 			    <% end %>
 			    </div>
 		  	</div>
@@ -148,7 +157,7 @@
 		<% end %>
 	</div>
 </div>
-<br>
+<br><br>
 
 <%=link_to videos_path do %>
 	<button class="fluid ui inverted primary button">Explore All Videos</button>
