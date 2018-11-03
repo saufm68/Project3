@@ -22,7 +22,7 @@ profiles = Profile.create(
   user_id: 1,
   username: 'admin',
   photo_url: 'admin.jpeg',
-  bio: 'admin',
+  bio: 'Admin',
   exp: 0,
   level: 1
 )
