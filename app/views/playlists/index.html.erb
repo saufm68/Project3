@@ -39,6 +39,77 @@
 	<%end%>
 </div>
 
+<%# All Playlists %>
+<h1>All Playlists</h1>
+
+<div class="ui styled fluid accordion">
+	<% @playlists.each do |playlist|%>
+		<% if playlist.profile_id != 1 && (!current_user || playlist.profile_id != current_user.id) %>
+			<div class="title item">
+				<i class="dropdown-button teal dropdown middle aligned icon"></i>
+				<a class="header"><%= link_to playlist.name, playlist_path(playlist) %></a>
+
+				<%# Icons to delete playlists %>
+				<%= link_to playlist_path(playlist),
+					class: "right floated",
+					method: :delete,
+					data: { confirm: 'Are you sure?' } do %>
+					<i class="teal delete icon link delete-playlist-button" style="display: none"></i>
+				<% end %>
+			</div>
+
+			<div class="content">
+				<%# display dropdown of each video %>
+				<div class="transition hidden">
+					<div class="ui stackable four column grid container">
+			    <% playlist.videos.each do |video| %>
+						<% string = video.video_url.dup %>
+						<% string.gsub!('www','img')%>
+						<% string = string.gsub!('embed','vi') %>
+							<% if string %>
+							  <% string << '/0.jpg' %>
+								<div class="column">
+									<div class="playlist-video-box">
+										<%= link_to image_tag(string, class: "preview-image"),  playlist_video_path(playlist.id, video.id) %>
+									</div>
+								</div>
+						<% end %>
+			    <% end %>
+			    </div>
+		  	</div>
+			</div>
+		<% end %>
+	<% end %>
+</div>
+
+<%# modal create form %>
+<div class="ui basic modal">
+  <div class="ui icon header">
+    <i class="signup icon"></i>
+    Creating New Playlist
+  </div>
+  <div class="content">
+		<%= form_with model: Playlist.new, url: playlists_path, class:"ui form" ,local: true do |form| %>
+
+			<div class="field">
+		    <div class="ui pointing below teal basic label">
+		      Name your new playlist
+		    </div>
+		    <%= form.text_field :name, placeholder: 'name of playlist' %>
+			</div>
+
+		  <div class="actions">
+		    <div class="ui red basic cancel inverted button">
+		      <i class="remove icon"></i>
+		     Cancel
+		    </div>
+		     <%= form.submit  class:"ui green ok inverted button" %>
+		  </div>
+		<% end %>
+	</div>
+</div>
+<br>
+
 <%# Your personnal playlist %>
 <% if user_signed_in? %>
 	<h1>Your Playlist
@@ -86,128 +157,53 @@
 <%else %>
 	<h1>Log in to create your own playlist</h1>
 <% end %>
-<br>
-
-<%# All Playlists %>
-<h1>All Playlists</h1>
-
-<div class="ui styled fluid accordion">
-	<% @playlists.each do |playlist|%>
-		<% if playlist.profile_id != 1 && playlist.profile_id != current_user.id %>
-			<div class="title item">
-				<i class="dropdown-button teal dropdown middle aligned icon"></i>
-				<a class="header"><%= link_to playlist.name, playlist_path(playlist) %></a>
-
-				<%# Icons to delete playlists %>
-				<%= link_to playlist_path(playlist),
-					class: "right floated",
-					method: :delete,
-					data: { confirm: 'Are you sure?' } do %>
-					<i class="teal delete icon link delete-playlist-button" style="display: none"></i>
-				<% end %>
-			</div>
-
-			<div class="content">
-				<%# display dropdown of each video %>
-				<div class="transition hidden">
-					<div class="ui stackable four column grid container">
-			    <% playlist.videos.each do |video| %>
-						<% string = video.video_url.dup %>
-						<% string.gsub!('www','img')%>
-						<% string = string.gsub!('embed','vi') << '/0.jpg'%>
-							<% if string %>
-							  <% string << '/0.jpg' %>
-								<div class="column">
-									<div class="playlist-video-box">
-										<%= link_to image_tag(string, class: "preview-image"),  playlist_video_path(playlist.id, video.id) %>
-									</div>
-								</div>
-						<% end %>
-			    <% end %>
-			    </div>
-		  	</div>
-			</div>
-		<% end %>
-	<% end %>
-</div>
-
-<%# modal create form %>
-<div class="ui basic modal">
-  <div class="ui icon header">
-    <i class="signup icon"></i>
-    Creating New Playlist
-  </div>
-  <div class="content">
-		<%= form_with model: Playlist.new, url: playlists_path, class:"ui form" ,local: true do |form| %>
-
-			<div class="field">
-		    <div class="ui pointing below teal basic label">
-		      Name your new playlist
-		    </div>
-		    <%= form.text_field :name, placeholder: 'name of playlist' %>
-			</div>
-
-		  <div class="actions">
-		    <div class="ui red basic cancel inverted button">
-		      <i class="remove icon"></i>
-		     Cancel
-		    </div>
-		     <%= form.submit  class:"ui green ok inverted button" %>
-		  </div>
-		<% end %>
-	</div>
-</div>
 <br><br>
 
 <%=link_to videos_path do %>
 	<button class="fluid ui inverted primary button">Explore All Videos</button>
 <% end %>
 
-<script>
+<% if user_signed_in? %>
+	<script>
 
-	createButton = document.getElementById('create-button');
-
-	createForm = document.getElementById('create-form');
-
-	createButton.addEventListener('click', function(event){
-				$('.ui.modal')
-				  .modal('show')
-				;
-	});
-
-	minusbutton = document.getElementById('remove-button')
-
-	deleteform = document.querySelectorAll('.mine')
-
-	minusbutton.addEventListener('click', function(event){
-		deleteform.forEach(function(item){
-			if(item.style.display === "none"){
-				item.style.display= "inline"
-			}
-			else{
-				item.style.display = "none"
-			}
-
+		createButton = document.getElementById('create-button');
+		createForm = document.getElementById('create-form');
+		createButton.addEventListener('click', function(event){
+					$('.ui.modal')
+					  .modal('show')
+					;
 		});
-	});
 
-//pop ups for create and remove playlist button
-$('#create-button')
-  .popup()
-;
+		minusbutton = document.getElementById('remove-button')
+		deleteform = document.querySelectorAll('.mine')
+		minusbutton.addEventListener('click', function(event){
+			deleteform.forEach(function(item){
+				if(item.style.display === "none"){
+					item.style.display= "inline"
+				}
+				else{
+					item.style.display = "none"
+				}
 
-$('#remove-button')
-  .popup()
-;
+			});
+		});
 
-$('#create-button-user')
-  .popup()
-;
+	//pop ups for create and remove playlist button
+	$('#create-button')
+	  .popup()
+	;
 
-$('#remove-button-user')
-  .popup()
-;
+	$('#remove-button')
+	  .popup()
+	;
 
-$('.ui.accordion').accordion();
+	$('#create-button-user')
+	  .popup()
+	;
 
-</script>
+	$('#remove-button-user')
+	  .popup()
+	;
+
+	</script>
+<% end %>

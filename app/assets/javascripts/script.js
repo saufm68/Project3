@@ -40,4 +40,8 @@ window.onload = function() {
     $('.file').val('');
     $('.upload').show();
   });
+
+  $('.ui.accordion').accordion();
 };
+
+

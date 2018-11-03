@@ -6,10 +6,6 @@ class PlaylistsController < ApplicationController
 
   end
 
-  def new
-    @playlist = Playlist.all
-  end
-
   def create
     @playlist = Playlist.new(playlist_params)
     @playlist.profile_id = current_user.id
