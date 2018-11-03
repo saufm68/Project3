@@ -1,123 +1,82 @@
 <h1><%= @yourPlaylist.name %>
+	<% if user_signed_in? && current_user.id == @yourPlaylist.profile.id %>
+		<i class="small icon fitted add square" id="create-button" data-content="Add Video"></i>
+		<i class="small icon fitted minus square outline" id="remove-button" data-content="Delete Video"></i>
+	<%end%>
 
-
-
-<% if user_signed_in? && current_user.id == @yourPlaylist.profile.id %>
-<i class="small icon fitted add square" id="create-button" data-content="Add Video"></i>
-
-<i class="small icon fitted minus square outline" id="remove-button" data-content="Delete Video"></i>
-
-
-<%end%>
-
-<%= link_to 'All playlist', playlists_path %>
-
+	<%= link_to 'All playlist', playlists_path %>
 </h1>
 
 <% @yourPlaylist.videos.each do |video| %>
-
 	<% string = video.video_url.dup %>
 	<% string.gsub!('www','img')%>
 	<% string = string.gsub!('embed','vi') << '/0.jpg'%>
 
-				<%= link_to image_tag(string, class: "preview-image"), video_path(video) %>
+	<%= link_to image_tag(string, class: "preview-image"), video_path(video) %>
 
-		<%# Icons to delete playlists %>
-		<%= link_to remove_video_from_playlist_path(@yourPlaylist, video),
-			class: "right floated",
-			method: :delete,
-			data: { confirm: 'Do you want to remove this video from playlist' } do %>
-			<div class="negative ui button link delete-playlist-button" style="display: none">Delete icon</div>
-			<% end %>
-
-<%end%>
-
-
-
-
-
+	<%# Icons to delete playlists %>
+	<%= link_to remove_video_from_playlist_path(@yourPlaylist, video),
+		method: :delete,
+		data: { confirm: 'Do you want to remove this video from playlist' } do %>
+		<div class="negative ui button link delete-playlist-button" style="display: none">Remove Video</div>
+	<% end %>
+<% end %>
 
 <%# modal create form %>
-
 <div class="ui basic modal">
   <div class="ui icon header">
     <i class="signup icon"></i>
     Add Video
   </div>
   <div class="content">
+		<%= form_with model: Video.new, url: videos_path, class:"ui form" ,local: true do |form| %>
 
-	<%= form_with model: Video.new, url: videos_path, class:"ui form" ,local: true do |form| %>
+			<div class="field">
+		    <%= form.label :name %>
+		    <div class="ui pointing below teal basic label">
+		      Enter video name
+		    </div>
+			    <%= form.text_field :name %>
+			</div>
 
-		<div class="field">
-	    <%= form.label :video_url %>
+			<div class="field">
+		    <%= form.label :video_url %>
+		    <div class="ui pointing below teal basic label">
+		      Enter your video url
+		    </div>
+			    <%= form.text_field :video_url, placeholder: 'www.video.com/embed' %>
+			</div>
 
-    <div class="ui pointing below teal basic label">
-      Enter your video url
-    </div>
-	    <%= form.text_field :video_url, placeholder: 'www.video.com/embed' %>
+			<div class="field">
+			    <%= form.hidden_field :playlist_id, value: @yourPlaylist.id %>
+			</div>
+			<br>
 
-		</div>
-
-		<div class="field">
-	    <%= form.label :video_url %>
-
-    <div class="ui pointing below teal basic label">
-      Enter your video url
-    </div>
-	    <%= form.hidden_field :playlist_id, value: @yourPlaylist.id %>
-
-		</div>
-
-	  <p>
-
-	  </p>
-
-
-	  <div class="actions">
-	    <div class="ui red basic cancel inverted button">
-	      <i class="remove icon"></i>
-	     Cancel
-	    </div>
-
-
-	      <%= form.submit 'Add Video' , class:"ui green ok inverted button" %>
-
-
-	  </div>
-	<% end %>
+		  <div class="actions">
+		    <div class="ui red basic cancel inverted button">
+		      <i class="remove icon"></i>
+		     Cancel
+		    </div>
+		      <%= form.submit 'Add Video' , class:"ui green ok inverted button" %>
+		  </div>
+		<% end %>
+	</div>
 </div>
-</div>
-
-
-
-
 
 <script>
 //delete button
-	minusbutton = document.getElementById('remove-button')
-
-	deleteform = document.querySelectorAll('.delete-playlist-button')
-
+	minusbutton = document.getElementById('remove-button');
+	deleteform = document.querySelectorAll('.delete-playlist-button');
 	minusbutton.addEventListener('click', function(event){
 		deleteform.forEach(function(item){
-			console.log(item)
-
-
-
 			if(item.style.display === "none"){
 				item.style.display= "inline"
 			}
 			else{
 				item.style.display = "none"
 			}
-
-
-
-		})
-
-	})
-
-
+		});
+	});
 
 //Add button pop up
 	$('#create-button')
@@ -125,25 +84,16 @@
 	;
 
 //Remove button pop up
-
 	$('#remove-button')
   .popup()
-;
-
-
-
+	;
 //Add video modal
-
-	createButton = document.getElementById('create-button')
-
+	createButton = document.getElementById('create-button');
 	createButton.addEventListener('click', function(event){
 				$('.ui.modal')
 				  .modal('show')
 				;
-	})
+	});
 
-	// $('#remove-button')
-	//   .popup()
-	// ;
 </script>
 
