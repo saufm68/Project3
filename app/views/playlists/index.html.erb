@@ -1,50 +1,42 @@
-<h1>Explore</h1>
-
-<%=link_to 'explore',playlist_videos_path(@playlist)%>
-
-<h1>Curated for You
-	<% if user_signed_in? && current_user.id == 1%>
-		<i class="small icon fitted add square" id="create-button" data-content="Add Playlist"></i>
-		<i class="small icon fitted minus square outline" id="remove-button" data-content="Delete Playlist"></i>
-	<%end%>
-</h1>
+<h1>Curated for You</h1>
 
 <div class="ui styled fluid accordion">
-	<% @playlist.each do |playlist|%>
-		<div class="title item">
-			<i class="dropdown-button teal dropdown middle aligned icon"></i>
-			<a class="header"><%= playlist.name %></a>
-			<%# Icons to delete playlists %>
-			<%= link_to playlist_path(playlist),
-				class: "right floated",
-				method: :delete,
-				data: { confirm: 'Are you sure?' } do %>
-				<i class="teal delete icon link delete-playlist-button" style="display: none"></i>
-			<% end %>
-		</div>
+	<% @playlists.each do |playlist|%>
+		<% if playlist.profile_id == 1 %>
+			<div class="title item">
+				<i class="dropdown-button teal dropdown middle aligned icon"></i>
+				<a class="header"><%= playlist.name %></a>
+				<%# Icons to delete playlists %>
+				<%= link_to playlist_path(playlist),
+					class: "right floated",
+					method: :delete,
+					data: { confirm: 'Are you sure?' } do %>
+					<i class="teal delete icon link delete-playlist-button" style="display: none"></i>
+				<% end %>
+			</div>
 
-		<div class="content">
-			<%# display dropdown of each video %>
-			<div class="transition hidden">
-				<div class="ui stackable four column grid container">
-			    <% playlist.videos.each do |video| %>
-						<% string = video.video_url.dup %>
-						<% string.gsub!('www','img')%>
-						<% string = string.gsub!('embed','vi') << '/0.jpg'%>
-						<div class="column">
-							<div class="playlist-video-box">
-								<%= link_to image_tag(string, class: "preview-image"),  playlist_video_path(playlist.id, video.id) %>
+			<div class="content">
+				<%# display dropdown of each video %>
+				<div class="transition hidden">
+					<div class="ui stackable four column grid container">
+				    <% playlist.videos.each do |video| %>
+							<% string = video.video_url.dup %>
+							<% string.gsub!('www','img')%>
+							<% string = string.gsub!('embed','vi') << '/0.jpg'%>
+							<div class="column">
+								<div class="playlist-video-box">
+									<%= link_to image_tag(string, class: "preview-image"),  playlist_video_path(playlist.id, video.id) %>
+								</div>
 							</div>
-						</div>
-			    <% end %>
-		    </div>
-	  	</div>
-		</div>
+				    <% end %>
+			    </div>
+		  	</div>
+			</div>
+		<% end %>
 	<%end%>
 </div>
 
 <%# Your personnal playlist %>
-
 <% if user_signed_in? %>
 	<h1>Your Playlist
 		<i class="small icon fitted add square" id="create-button" data-content="Add Playlist"></i>
@@ -62,7 +54,7 @@
 					class: "right floated",
 					method: :delete,
 					data: { confirm: 'Are you sure?' } do %>
-					<i class="teal delete icon link delete-playlist-button" style="display: none"></i>
+					<i class="teal delete icon link delete-playlist-button mine" style="display: none"></i>
 				<% end %>
 			</div>
 
@@ -88,9 +80,49 @@
 <%else %>
 	<h1>Log in to create your own playlist</h1>
 <% end %>
+<br>
+
+<%# All Playlists %>
+<h1>All Playlists</h1>
+
+<div class="ui styled fluid accordion">
+	<% @playlists.each do |playlist|%>
+		<% if playlist.profile_id != 1 && playlist.profile_id != current_user.id %>
+			<div class="title item">
+				<i class="dropdown-button teal dropdown middle aligned icon"></i>
+				<a class="header"><%= link_to playlist.name, playlist_path(playlist) %></a>
+
+				<%# Icons to delete playlists %>
+				<%= link_to playlist_path(playlist),
+					class: "right floated",
+					method: :delete,
+					data: { confirm: 'Are you sure?' } do %>
+					<i class="teal delete icon link delete-playlist-button mine" style="display: none"></i>
+				<% end %>
+			</div>
+
+			<div class="content">
+				<%# display dropdown of each video %>
+				<div class="transition hidden">
+					<div class="ui stackable four column grid container">
+			    <% playlist.videos.each do |video| %>
+						<% string = video.video_url.dup %>
+						<% string.gsub!('www','img')%>
+						<% string = string.gsub!('embed','vi') << '/0.jpg'%>
+						<div class="column">
+							<div class="playlist-video-box">
+								<%= link_to image_tag(string, class: "preview-image"),  playlist_video_path(playlist.id, video.id) %>
+							</div>
+						</div>
+			    <% end %>
+			    </div>
+		  	</div>
+			</div>
+		<% end %>
+	<% end %>
+</div>
 
 <%# modal create form %>
-
 <div class="ui basic modal">
   <div class="ui icon header">
     <i class="signup icon"></i>
@@ -116,22 +148,27 @@
 		<% end %>
 	</div>
 </div>
+<br>
+
+<%=link_to videos_path do %>
+	<button class="fluid ui inverted primary button">Explore All Videos</button>
+<% end %>
 
 <script>
 
-	createButton = document.getElementById('create-button')
+	createButton = document.getElementById('create-button');
 
-	createForm = document.getElementById('create-form')
+	createForm = document.getElementById('create-form');
 
 	createButton.addEventListener('click', function(event){
 				$('.ui.modal')
 				  .modal('show')
 				;
-	})
+	});
 
 	minusbutton = document.getElementById('remove-button')
 
-	deleteform = document.querySelectorAll('.delete-playlist-button')
+	deleteform = document.querySelectorAll('.mine')
 
 	minusbutton.addEventListener('click', function(event){
 		deleteform.forEach(function(item){
@@ -142,8 +179,8 @@
 				item.style.display = "none"
 			}
 
-		})
-	})
+		});
+	});
 
 //pop ups for create and remove playlist button
 $('#create-button')
