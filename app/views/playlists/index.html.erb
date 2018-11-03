@@ -163,51 +163,47 @@
 	<button class="fluid ui inverted primary button">Explore All Videos</button>
 <% end %>
 
-<script>
+<% if user_signed_in? %>
+	<script>
 
-	createButton = document.getElementById('create-button');
-
-	createForm = document.getElementById('create-form');
-
-	createButton.addEventListener('click', function(event){
-				$('.ui.modal')
-				  .modal('show')
-				;
-	});
-
-	minusbutton = document.getElementById('remove-button')
-
-	deleteform = document.querySelectorAll('.mine')
-
-	minusbutton.addEventListener('click', function(event){
-		deleteform.forEach(function(item){
-			if(item.style.display === "none"){
-				item.style.display= "inline"
-			}
-			else{
-				item.style.display = "none"
-			}
-
+		createButton = document.getElementById('create-button');
+		createForm = document.getElementById('create-form');
+		createButton.addEventListener('click', function(event){
+					$('.ui.modal')
+					  .modal('show')
+					;
 		});
-	});
 
-//pop ups for create and remove playlist button
-$('#create-button')
-  .popup()
-;
+		minusbutton = document.getElementById('remove-button')
+		deleteform = document.querySelectorAll('.mine')
+		minusbutton.addEventListener('click', function(event){
+			deleteform.forEach(function(item){
+				if(item.style.display === "none"){
+					item.style.display= "inline"
+				}
+				else{
+					item.style.display = "none"
+				}
 
-$('#remove-button')
-  .popup()
-;
+			});
+		});
 
-$('#create-button-user')
-  .popup()
-;
+	//pop ups for create and remove playlist button
+	$('#create-button')
+	  .popup()
+	;
 
-$('#remove-button-user')
-  .popup()
-;
+	$('#remove-button')
+	  .popup()
+	;
 
-$('.ui.accordion').accordion();
+	$('#create-button-user')
+	  .popup()
+	;
 
-</script>
+	$('#remove-button-user')
+	  .popup()
+	;
+
+	</script>
+<% end %>
