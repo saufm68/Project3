@@ -16,14 +16,22 @@
                   </div>
                 </div>
               </div>
-              <%= cl_image_tag(@profile.photo_url, :width=>290, :height=>290, :crop=>"scale") %>
+              <% if user_signed_in? && @profile.id == 1 %>
+              	<%= image_tag(@profile.photo_url, :width=>290, :height=>290, :crop=>"scale") %>
+              <% else %>
+              	<%= cl_image_tag(@profile.photo_url, :width=>290, :height=>290, :crop=>"scale") %>
+              <% end %>
             </div>
           </div>
         </div>
       <% else %>
         <div class="ui card">
           <div class="image">
-            <%= cl_image_tag(@profile.photo_url, :width=>290, :height=>290, :crop=>"scale") %>
+            <% if user_signed_in? && @profile.id == 1 %>
+            	<%= image_tag(@profile.photo_url, :width=>290, :height=>290, :crop=>"scale") %>
+            <% else %>
+            	<%= cl_image_tag(@profile.photo_url, :width=>290, :height=>290, :crop=>"scale") %>
+            <% end %>
           </div>
         </div>
       <% end %>
@@ -108,7 +116,11 @@
       <% if @profile.playlists.length > 0 %>
         <% @profile.playlists.each do |playlist|%>
           <a href="<%= playlist_path(playlist) %>" class="item question">
-            <%= cl_image_tag(@profile.photo_url, class: "ui avatar image") %>
+            <% if user_signed_in? && @profile.id == 1 %>
+            	<%= image_tag(@profile.photo_url, class: "ui avatar image") %>
+            <% else %>
+            	<%= cl_image_tag(@profile.photo_url, class: "ui avatar image") %>
+            <% end %>
             <div class="content">
               <div class="header"><%= playlist.name %></div>
             </div>

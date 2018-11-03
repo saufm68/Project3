@@ -32,12 +32,6 @@ class QuestionsController < ApplicationController
     @answers = Answer.where(question_id: @question.id).order('answered DESC ,vote DESC, updated_at')
   end
 
-  def edit
-  end
-
-  def update
-  end
-
   def destroy
     @question = Question.find(params[:id])
     @question.destroy

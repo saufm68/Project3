@@ -27,13 +27,9 @@
 <%= link_to 'Back', playlists_path %>
 
 <script>
-	select = document.getElementById('playlist_playlist_id')
-	console.log(select.value);
+	select = document.getElementById('playlist_playlist_id');
 	select.addEventListener('change', function(){
-	deleteform = document.getElementById('deleteoption')
-	deleteform.setAttribute('action', '/playlists/'+select.value)
-
-
-			console.log(select.value)
-	 })
+		deleteform = document.getElementById('deleteoption');
+		deleteform.setAttribute('action', '/playlists/'+select.value);
+	});
 </script>

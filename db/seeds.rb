@@ -13,6 +13,20 @@ tags = Tag.create([
   { name: 'pronunciation' }
 ])
 
+users = User.create(
+  email: 'admin@gmail.com',
+  password: 'admin1234'
+)
+
+profiles = Profile.create(
+  user_id: 1,
+  username: 'admin',
+  photo_url: 'admin.jpeg',
+  bio: 'Admin',
+  exp: 0,
+  level: 1
+)
+
 videos = Video.create([
   { name: "Beginner 1" , video_url: "https://www.youtube.com/embed/wpC9bz8Comw", profile_id: 1},
   { name: "Intermediate 1", video_url: "https://www.youtube.com/embed/X7q1J04xeS8", profile_id: 1},
