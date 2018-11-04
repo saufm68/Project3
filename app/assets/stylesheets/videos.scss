@@ -4,7 +4,11 @@
 	flex-wrap: wrap;
 }
 
-.ui.special.cards > .card.video-index-list {
+.ui.card:first-child.video-index-list {
+	margin-top: 1em;
+}
+
+.card.video-index-list {
 	width: 230px;
 	height: 270px;
 }

@@ -62,19 +62,19 @@
 				<%# display dropdown of each video %>
 				<div class="transition hidden">
 					<div class="ui stackable four column grid container">
-			    <% playlist.videos.each do |video| %>
-						<% string = video.video_url.dup %>
-						<% string.gsub!('www','img')%>
-						<% string = string.gsub!('embed','vi') %>
-							<% if string %>
-							  <% string << '/0.jpg' %>
-								<div class="column">
-									<div class="playlist-video-box">
-										<%= link_to image_tag(string, class: "preview-image"),  playlist_video_path(playlist.id, video.id) %>
+				    <% playlist.videos.each do |video| %>
+							<% string = video.video_url.dup %>
+							<% string.gsub!('www','img')%>
+							<% string = string.gsub!('embed','vi') %>
+								<% if string %>
+								  <% string << '/0.jpg' %>
+									<div class="column">
+										<div class="playlist-video-box">
+											<%= link_to image_tag(string, class: "preview-image"),  playlist_video_path(playlist.id, video.id) %>
+										</div>
 									</div>
-								</div>
-						<% end %>
-			    <% end %>
+							<% end %>
+				    <% end %>
 			    </div>
 		  	</div>
 			</div>

@@ -52,6 +52,7 @@
   <a class="active item" data-tab="threads">Threads</a>
   <a class="item" data-tab="bookmarks">Bookmarks</a>
   <a class="item" data-tab="playlists">Playlists</a>
+  <a class="item" data-tab="videos">Videos</a>
 </div>
 <div class="ui bottom attached active tab segment" data-tab="threads">
   <div class='content-container'>
@@ -102,6 +103,25 @@
           </a>
         <% end %>
       <% end %>
+    </div>
+  </div>
+</div>
+<div class="ui bottom attached tab segment" data-tab="videos">
+  <div class='content-container'>
+		<div class="ui stackable four column grid container">
+	    <% @profile.videos.each do |video| %>
+				<% string = video.video_url.dup %>
+				<% string.gsub!('www','img')%>
+				<% string = string.gsub!('embed','vi') %>
+					<% if string %>
+					  <% string << '/0.jpg' %>
+						<div class="column">
+							<div class="playlist-video-box">
+								<%= link_to image_tag(string, class: "preview-image"), video_path(video.id) %>
+							</div>
+						</div>
+				<% end %>
+	    <% end %>
     </div>
   </div>
 </div>
