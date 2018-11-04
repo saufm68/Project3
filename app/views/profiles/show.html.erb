@@ -1,40 +1,15 @@
 <div class='ui grid'>
   <div class='two column row'>
     <div class='column'>
-      <% if user_signed_in? && @profile.id != current_user.id %>
-        <div class="ui special cards">
-          <div class="card">
-             <div class="blurring dimmable image">
-              <div class="ui dimmer">
-                <div class="content">
-                  <div class="center">
-                  <% if @profile.user %>
-                    <div class="ui inverted button">Video Call</div>
-                  <% else %>
-                    <div class="ui inverted button" disabled>Account Deleted</div>
-                  <% end %>
-                  </div>
-                </div>
-              </div>
-              <% if user_signed_in? && @profile.id == 1 %>
-              	<%= image_tag(@profile.photo_url, :width=>290, :height=>290, :crop=>"scale") %>
-              <% else %>
-              	<%= cl_image_tag(@profile.photo_url, :width=>290, :height=>290, :crop=>"scale") %>
-              <% end %>
-            </div>
-          </div>
+      <div class="ui card">
+        <div class="image">
+          <% if @profile.id == 1 %>
+          	<%= image_tag(@profile.photo_url, :width=>290, :height=>290, :crop=>"scale") %>
+          <% else %>
+          	<%= cl_image_tag(@profile.photo_url, :width=>290, :height=>290, :crop=>"scale") %>
+          <% end %>
         </div>
-      <% else %>
-        <div class="ui card">
-          <div class="image">
-            <% if user_signed_in? && @profile.id == 1 %>
-            	<%= image_tag(@profile.photo_url, :width=>290, :height=>290, :crop=>"scale") %>
-            <% else %>
-            	<%= cl_image_tag(@profile.photo_url, :width=>290, :height=>290, :crop=>"scale") %>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
+      </div>
     </div>
     <div class='column'>
       <div class="ui cards">
