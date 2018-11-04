@@ -26,7 +26,7 @@
 		        <div class="content">
 		          <div class="center">
 		          	<%= link_to video_path(video.id)  do %>
-		            <div class="ui inverted button">Watch</div>
+		            	<div class="ui inverted button">Watch</div>
 		            <% end %>
 		          </div>
 		        </div>
@@ -34,7 +34,7 @@
 		      <%= link_to image_tag(string, class: "preview-image"), video_path(video.id) %>
 		    </div>
 				<div class="content">
-		      <a class="header"><%= video.name %></a>
+					<%= link_to video.name, video_path(video.id), class: "header" %>
 		      <br>
 		      <div class="meta">
 		        <span class="date"><%= video.created_at%></span>
