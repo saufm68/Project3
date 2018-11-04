@@ -19,7 +19,12 @@
 	<% if user_signed_in? %>
 		<div class="two column row">
 			<div class="column">
-				<button class="positive ui button">Add To Playlist</button>
+				<div id="add-to-playlist-button" class="positive ui button">
+					<div class="left pointing dropdown">
+						Add To Playlist
+						<i class="dropdown icon"></i>
+					</div>
+				</div>
 			</div>
 			<div class="column">
 				<div class="ui right aligned container">
@@ -37,12 +42,28 @@
 </div>
 
 <% if user_signed_in? %>
-	<div>
-		<%= form_with scope: :playlists, url: add_video_to_playlist_path(@video), local: true do |form| %>
-		<div>
-			<%= form.collection_check_boxes :playlist_ids, current_user.profile.playlists, :id, :name %>
-		</div>
-		<%= form.submit 'SAVE', class: "ui positive button"  %>
+	<div id="add-form" class="add-to-playlist" style="display: none">
+		<%= form_with model: @video, url: add_video_to_playlist_path(@video), local: true do |form| %>
+			<div class="column checkbox-playlist">
+				<%= form.collection_check_boxes :playlist_ids, current_user.profile.playlists, :id, :name %>
+			</div>
+			<div class="form-divider">
+				<%= form.submit 'Save', class: "fluid positive ui button" %>
+			</div>
 		<% end %>
 	</div>
+
+	<script>
+		var dropdown = document.getElementById("add-to-playlist-button");
+		var form = document.getElementById("add-form");
+
+		dropdown.addEventListener("click", () => {
+			if (form.style.display === "none") {
+				form.style.display = "block";
+			} else {
+				form.style.display = "none";
+			}
+		});
+
+	</script>
 <% end %>

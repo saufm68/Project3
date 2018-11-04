@@ -81,33 +81,6 @@
 		<% end %>
 	<% end %>
 </div>
-
-<%# modal create form %>
-<div class="ui basic modal">
-  <div class="ui icon header">
-    <i class="signup icon"></i>
-    Creating New Playlist
-  </div>
-  <div class="content">
-		<%= form_with model: Playlist.new, url: playlists_path, class:"ui form" ,local: true do |form| %>
-
-			<div class="field">
-		    <div class="ui pointing below teal basic label">
-		      Name your new playlist
-		    </div>
-		    <%= form.text_field :name, placeholder: 'name of playlist' %>
-			</div>
-
-		  <div class="actions">
-		    <div class="ui red basic cancel inverted button">
-		      <i class="remove icon"></i>
-		     Cancel
-		    </div>
-		     <%= form.submit  class:"ui green ok inverted button" %>
-		  </div>
-		<% end %>
-	</div>
-</div>
 <br>
 
 <%# Your personnal playlist %>
@@ -120,16 +93,24 @@
 	<div class="ui styled fluid accordion">
 		<% @yourPlaylists.each do |playlist|%>
 			<div class="title item">
-				<i class="dropdown-button teal dropdown middle aligned icon"></i>
-				<a class="header"><%= link_to playlist.name, playlist_path(playlist) %></a>
-
-				<%# Icons to delete playlists %>
-				<%= link_to playlist_path(playlist),
-					class: "right floated",
-					method: :delete,
-					data: { confirm: 'Are you sure?' } do %>
-					<i class="teal delete icon link delete-playlist-button mine" style="display: none"></i>
-				<% end %>
+				<div class="ui grid playlist-mine">
+					<div class="two column row">
+						<div class="column">
+							<i class="dropdown-button teal dropdown middle aligned icon"></i>
+							<a class="header"><%= link_to playlist.name, playlist_path(playlist) %></a>
+						</div>
+						<div class="column">
+							<div class="ui right aligned container">
+								<%# Icons to delete playlists %>
+								<%= link_to playlist_path(playlist),
+									method: :delete,
+									data: { confirm: 'Are you sure?' } do %>
+									<i class="teal delete icon link delete-playlist-button mine" style="display: none"></i>
+								<% end %>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 
 			<div class="content">
@@ -162,6 +143,34 @@
 <%=link_to videos_path do %>
 	<button class="fluid ui inverted primary button">Explore All Videos</button>
 <% end %>
+
+<%# modal create form %>
+<div class="ui basic modal">
+  <div class="ui icon header">
+    <i class="signup icon"></i>
+    Creating New Playlist
+  </div>
+  <div class="content">
+		<%= form_with model: Playlist.new, url: playlists_path, class:"ui form" ,local: true do |form| %>
+
+			<div class="field">
+		    <div class="ui pointing below teal basic label">
+		      Name your new playlist
+		    </div>
+		    <%= form.text_field :name, placeholder: 'name of playlist' %>
+			</div>
+
+		  <div class="actions">
+		    <div class="ui red basic cancel inverted button">
+		      <i class="remove icon"></i>
+		     Cancel
+		    </div>
+		     <%= form.submit  class:"ui green ok inverted button" %>
+		  </div>
+		<% end %>
+	</div>
+</div>
+
 
 <% if user_signed_in? %>
 	<script>

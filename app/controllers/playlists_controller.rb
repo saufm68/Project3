@@ -37,7 +37,13 @@ class PlaylistsController < ApplicationController
 
   def add_video_to_playlist
     @video = Video.find(params[:video_id])
-    @playlists = params[:playlists][:playlist_ids]
+    @my_playlists = Playlist.where(profile_id: current_user.id)
+    @my_playlists.each do |playlist|
+      if playlist.videos.includes(@video)
+        playlist.videos.delete(@video)
+      end
+    end
+    @playlists = params[:video][:playlist_ids]
     @playlists.each do |playlist|
       unless playlist == ''
         @playlist = Playlist.find_by(id: playlist.to_i)
