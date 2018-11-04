@@ -1,4 +1,5 @@
 class BookmarksController < ApplicationController
+  before_action :authenticate_user!
 
   def create
     newParams = {profile_id: params[:profile_id], question_id: params[:question_id]}

@@ -1,4 +1,5 @@
 class AnswersController < ApplicationController
+  before_action :authenticate_user!
 
   def create
     question = Question.find(answer_params[:question_id])
