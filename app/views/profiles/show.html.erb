@@ -4,8 +4,7 @@
       <div class="ui card">
         <div class="image">
           <% if @profile.id == 1 %>
-          	<%#= image_tag(@profile.photo_url, :width=>290, :height=>290, :crop=>"scale") %>
-          	<img src="<%= image_url "admin.jpeg" %>" width='290' height='290' crop="scale" >
+          	<img src="<%= image_url "admin.jpeg" %>" >
           <% else %>
           	<%= cl_image_tag(@profile.photo_url, :width=>290, :height=>290, :crop=>"scale") %>
           <% end %>
