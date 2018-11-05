@@ -93,7 +93,7 @@
         <% @profile.playlists.each do |playlist|%>
           <a href="<%= playlist_path(playlist) %>" class="item question">
             <% if user_signed_in? && @profile.id == 1 %>
-            	<%= image_tag(@profile.photo_url, class: "ui avatar image") %>
+            	<img class="ui avatar image" src="<%= image_url @profile.photo_url %>">
             <% else %>
             	<%= cl_image_tag(@profile.photo_url, class: "ui avatar image") %>
             <% end %>
