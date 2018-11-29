@@ -1,24 +1,27 @@
-# README
+# MalayMe
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[MalayMe](https://malayme.herokuapp.com/) is a language learning platform to help users learn Malay. The site contains two main features. The first being a library of usesul videos teaching the language. The other being a Q&A platform where users can ask others questions regarding the language, encouraging a community based learning. This project was built in Ruby using Ruby on Rails Framework, Semantic UI, jQuery and PostgreSQL.
 
-Things you may want to cover:
+This is a collaboration project by [me](https://github.com/saufm68), [Clhoe](https://github.com/ChloeLiang) and [D Sen](https://github.com/wandsen). Please visit our github profiles to see our other projects.
 
-* Ruby version
+## Getting Started
+These instructions will help you clone the project and get it running on your local machine.
 
-* System dependencies
+### Prerequisites
+1. Install Ruby on Rails
+2. Install PostgreSQL
+3. Create a Cloudinary account
 
-* Configuration
+### Setting Up 
+--
 
-* Database creation
 
-* Database initialization
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+--
 
-* Deployment instructions
 
-* ...
+## Wireframes
+These are the initial wireframes for the application.
+
+
