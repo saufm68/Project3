@@ -29,4 +29,3 @@ These instructions will help you clone the project and get it running on your lo
 
 
 --
-
