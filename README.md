@@ -29,3 +29,37 @@ These instructions will help you clone the project and get it running on your lo
 
 
 --
+
+## Deployment
+These instructions is to deploy the app on heroku.
+
+### Deploy
+Create a Heroku app via the command line:
+```
+heroku create YOUR_APP_NAME_HERE
+```
+
+Add, and commit all your data to git. Then push it to Heroku:
+```
+git push heroku master
+```
+
+### Set Up Database
+
+On heroku, add Heroku Postgres as an add-on.
+
+Then, enter the following commands via the command line to set up the database and populate it:
+```
+heroku run rake db:migrate
+heroku run rake db:seed
+```
+
+### Configure Cloudinary
+
+Set up the configurations for your cloudinary account. This can be done on the command line or on heroku itself. 
+To set up the configurations via the command line, enter the following commands into your terminal: 
+```
+heroku config:set CLOUD_NAME=<placeholder>
+heroku config:set API_KEY=<placeholder>
+heroku config:set API_SECRET=<placeholder>
+```
