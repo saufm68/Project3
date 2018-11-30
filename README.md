@@ -5,6 +5,7 @@
 This is a collaboration project by [me](https://github.com/saufm68), [Chloe](https://github.com/ChloeLiang) and [D Sen](https://github.com/wandsen). Please visit our github profiles to see our other projects.
 
 ## Wireframes
+
 These are the initial wireframes for the application. The wireframes were donne on draw.io. As we progressed further into the project, we decided to change certain features in the final outcome to make it look more appealing.
 
 ![homepage wireframe](./wireframes/wireframe-home.png)
@@ -15,32 +16,61 @@ These are the initial wireframes for the application. The wireframes were donne 
 ![question page wireframe](./wireframes/wireframe-question.png)
 
 ## Getting Started
+
 These instructions will help you clone the project and get it running on your local machine.
 
 ### Prerequisites
+
 1. Install Ruby on Rails
 2. Install PostgreSQL
 3. Create a Cloudinary account
 
-### Setting Up 
---
+### Setting Up
 
+To use the Cloudinary Ruby on Rails library, you have to configure at least your cloud_name, api_key and api_secret.
+You can download your customized `cloudinary.yml` configration file through Management Console and put it under
+the `config` directory of this Rails project.
 
+Here is an example of a `cloudinary.yml` file:
 
+```yml
+production:
+  cloud_name: 'sample'
+  api_key: '874837483274837'
+  api_secret: 'a676b67565c6767a6767d6767f676fe1'
+  secure: true
+  cdn_subdomain: true
+```
 
---
+Install all dependencies in Gemfile:
+
+```bash
+bundle install
+```
+
+Start the development server:
+
+```bash
+rails server
+```
+
+Open [http://localhost:3000](http://localhost:3000) to view it in browser.
 
 ## Deployment
+
 These instructions is to deploy the app on heroku.
 
 ### Deploy
+
 Create a Heroku app via the command line:
-```
+
+```bash
 heroku create YOUR_APP_NAME_HERE
 ```
 
 Add, and commit all your data to git. Then push it to Heroku:
-```
+
+```bash
 git push heroku master
 ```
 
@@ -49,16 +79,18 @@ git push heroku master
 On heroku, add Heroku Postgres as an add-on.
 
 Then, enter the following commands via the command line to set up the database and populate it:
-```
+
+```bash
 heroku run rake db:migrate
 heroku run rake db:seed
 ```
 
 ### Configure Cloudinary
 
-Set up the configurations for your cloudinary account. This can be done on the command line or on heroku itself. 
-To set up the configurations via the command line, enter the following commands into your terminal: 
-```
+Set up the configurations for your cloudinary account. This can be done on the command line or on heroku itself.
+To set up the configurations via the command line, enter the following commands into your terminal:
+
+```bash
 heroku config:set CLOUD_NAME=<placeholder>
 heroku config:set API_KEY=<placeholder>
 heroku config:set API_SECRET=<placeholder>
